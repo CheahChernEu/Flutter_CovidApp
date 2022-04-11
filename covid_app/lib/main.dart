@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'homepage.dart';
-
+import 'adminDashboard.dart';
 // import 'SecondRoutePage.dart';
 
 void main() {
@@ -19,8 +19,9 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the homePage widget.
-        '/': (context) => const homePage(),
+        '/': (context) => const HomePage(),
         '/admin': (context) =>  const AdminPage(),
+        '/adminDashboard': (context) =>  const AdminDashboard(),
         // '/third': (context) => const ThirdPageForm(),
         // '/fourth': (context) => const FourthPageForm(),
       },

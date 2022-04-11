@@ -1,15 +1,42 @@
 import 'animation.dart';
 import 'package:flutter/material.dart';
+import 'adminDashboard.dart';
 
-class LoginPage extends StatelessWidget {
+
+
+class LoginPage extends StatefulWidget {
+  LoginPage({Key? key}) : super(key: key);
+
   @override
+  login createState() => login();
+}
 
+class login extends State<LoginPage> {
+
+
+  @override
   final _formKey = GlobalKey<FormState>();
+
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color.fromRGBO(3, 9, 23, 1),
       body: Form(
         key: _formKey,
+
         child: Container(
           padding: EdgeInsets.all(30),
 
@@ -20,7 +47,7 @@ class LoginPage extends StatelessWidget {
               new ElevatedButton(
                 child: const Text('Home'),
                 onPressed: ( ) {
-                  Navigator.pop(context);
+                  Navigator.pushNamed(context, '/');
                 },
               ),
               FadeAnimation(1.2, Text("Login to Covid_App",
@@ -39,6 +66,7 @@ class LoginPage extends StatelessWidget {
                           border: Border(bottom: BorderSide(color: Colors.grey))
                       ),
                       child: TextFormField(
+                        controller: emailController,
                         decoration: InputDecoration(
                             icon: const Icon(Icons.email),
                             border: InputBorder.none,
@@ -57,6 +85,7 @@ class LoginPage extends StatelessWidget {
                       decoration: BoxDecoration(
                       ),
                       child: TextFormField(
+                        controller: passwordController,
                         decoration: InputDecoration(
                             icon: const Icon(Icons.password),
                             border: InputBorder.none,
@@ -76,22 +105,38 @@ class LoginPage extends StatelessWidget {
               )),
               SizedBox(height: 40,),
               FadeAnimation(1.8, Center(
-                child: new ElevatedButton(
+                child: ElevatedButton(
                   child: const Text('Login'),
+
                   onPressed: () {
+                    final snackBar = SnackBar(
+                      content: const Text('Authenticating'),
+                    );
+
+                    final successMessage = SnackBar(
+                      content: const Text('Successful Login!'),
+                    );
+
                     // It returns true if the form is valid, otherwise returns false
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a Snackbar.
-                      Scaffold.of(context)
-                          .showSnackBar(SnackBar(content: Text('Data is in processing.')));
+                      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
+                      if(emailController.text == "admin@gmail.com" && passwordController.text == "admin123"){
+                        ScaffoldMessenger.of(context).showSnackBar(successMessage);
+                        Navigator.pushNamed(context, '/adminDashboard');
+                      }
                     }
+
                   },
+
                 ),
 
               )),
             ],
           ),
-        ),
+
+      ),
       ),
     );
   }

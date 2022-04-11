@@ -10,28 +10,14 @@ import 'common.dart';
 import 'package:rxdart/rxdart.dart';
 import 'login.dart';
 
-class homePage extends StatelessWidget {
-  const homePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Video Player Demo',
-      home: VideoPlayerScreen(),
-    );
-  }
-}
-
-
-
-class VideoPlayerScreen extends StatefulWidget {
-  const VideoPlayerScreen({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
 
-class _VideoPlayerScreenState extends State<VideoPlayerScreen> with WidgetsBindingObserver {
+class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserver {
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
   final asset = 'assets/video/prevention.mp4';
@@ -43,8 +29,10 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> with WidgetsBindi
     // Create and store the VideoPlayerController. The VideoPlayerController
     // offers several different constructors to play videos from assets, files,
     // or the internet.
-    _controller = VideoPlayerController.asset(asset);
-
+    _controller = VideoPlayerController.asset(asset)
+    ..addListener(() => setState(() {}))
+    ..setLooping(true)
+    ..initialize().then((_) => _controller.play());
     // Initialize the controller and store the Future for later use.
     _initializeVideoPlayerFuture = _controller.initialize();
 
@@ -71,7 +59,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> with WidgetsBindi
     // Try to load audio from a source and catch any errors.
     try {
       await _player.setAudioSource(AudioSource.uri(Uri.parse(
-          "https://s3.amazonaws.com/scifri-episodes/scifri20181123-episode.mp3")));
+          "https://ccrma.stanford.edu/~jos/mp3/pno-cs.mp3")));
     } catch (e) {
       print("Error loading audio source: $e");
     }
@@ -205,10 +193,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> with WidgetsBindi
                   child: const Text('Admin'),
                   onPressed: () {
                     // It returns true if the form is valid, otherwise returns false
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) =>  AdminPage()),
-                    );
+                    Navigator.pushNamed(context, '/admin');
                     Scaffold.of(context)
                         .showSnackBar(SnackBar(content: Text('Continue as Admin')));
                   },
