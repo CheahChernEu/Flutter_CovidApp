@@ -415,46 +415,48 @@ class DisplayClinics extends StatelessWidget {
                                   actions: <Widget>[
                                     new ElevatedButton(
                                       onPressed: () {
-                                        final snackBar = SnackBar(
-                                          content: const Text('Delete Successfully!'),
-                                        );
-
                                         showDialog(
                                           context: context,
                                           builder: (context) {
+                                            final snackBar = SnackBar(
+                                              content: const Text('Delete Successfully!'),
+                                            );
                                             return AlertDialog(
                                               // Retrieve the text the that user has entered by using the
                                               // TextEditingController.
-                                              content: Row(
+                                              title: const Text('Delete Alert:'),
+                                              content: Column(
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: <Widget>[
+                                                    Text("Clinic Id: " + data![index].clinicID),
+                                                    Text("Clinic Name: " + data![index].clinicName),
+                                                    Text("Contact Number: " + data![index].contactNo),
+                                                    Text("Address: " + data![index].address),
+                                                    Text("Vaccine Brand: " + data![index].vaccineBrand),
+                                                    Text("Latitude: " + data![index].latitude),
+                                                    Text("Longitude: " + data![index].longitude),
                                                     new ElevatedButton(
                                                       onPressed: () {
                                                         data?.removeAt(index);
                                                         deleteClinic(item!.getClinicID());
                                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                        Navigator.pop(context, 'Confirm');},
+                                                        Navigator.pop(context, 'Confirm Delete');
+                                                        },
                                                       child: const Text('Confirm'),
                                                     ),
 
                                                     new ElevatedButton(
                                                       onPressed: () {
-
-                                                        Navigator.pop(context, 'Cancel');
+                                                        Navigator.pop(context, 'Cancel Delete');
                                                       },
                                                       child: const Text('Cancel'),
                                                     ),
-
                                                   ]
                                               ),
                                             );
                                           },
                                         );
-
-
-                                        Navigator.pop(context, 'Delete');
-
                                       },
                                       child: const Text('Delete'),
                                     ),
@@ -464,31 +466,22 @@ class DisplayClinics extends StatelessWidget {
                                           context: context,
                                           builder: (context) {
                                             return AlertDialog(
-
-                                              content: UpdatePage(clinicID:item!.getClinicID(), deathCases:item!.deathCases, newCases: item!.newCases,casesDate: item!.casesDate ),
+                                              content: UpdatePage(clinicID:item!.getClinicID(), clinicName:item!.clinicName, contactNo:item!.contactNo, address:item!.address, vaccineBrand:item!.vaccineBrand, latitude:item!.latitude, longitude:item!.longitude),
                                             );
                                           },
                                         );
-
                                         // Navigator.pop(context, 'Update');
                                       },
                                       child: const Text('Update'),
-
                                     ),
                                     new ElevatedButton(
-                                      onPressed: () => Navigator.pop(context, 'Cancel'),
+                                      onPressed: () => Navigator.pop(context, 'Cancel Update'),
                                       child: const Text('Cancel'),
                                     ),
                                   ],
-
-
                                 ),
-
-
-
                               );
-                            },  child: CaseCard(caseID:data![index].id, deathCases:data![index].deathCases, newCases: data![index].newCases,casesDate: data![index].casesDate )),
-
+                            },  child: ClinicCard(clinicID:data![index].clinicID, clinicName:data![index].clinicName, contactNo:data![index].contactNo, address:data![index].address, vaccineBrand:data![index].vaccineBrand, latitude:data![index].latitude, longitude:data![index].longitude)),
                       );
                     }
                 );
@@ -504,13 +497,16 @@ class DisplayClinics extends StatelessWidget {
   }
 }
 
-class CaseCard extends StatelessWidget {
-  const CaseCard({Key? key, required this.caseID, required this.deathCases, required this.newCases, required this.casesDate}) :
+class ClinicCard extends StatelessWidget {
+  const ClinicCard({Key? key, required this.clinicID, required this.clinicName, required this.contactNo, required this.address, required this.vaccineBrand, required this.latitude, required this.longitude,}) :
         super(key: key);
-  final String caseID;
-  final String deathCases;
-  final String newCases;
-  final String casesDate;
+  final String clinicID;
+  final String clinicName;
+  final String contactNo;
+  final String address;
+  final String vaccineBrand;
+  final String latitude;
+  final String longitude;
 
   Widget build(BuildContext context) {
     return Container(
@@ -523,23 +519,30 @@ class CaseCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text(
-                "Case ID: " + this.caseID, style: TextStyle(
+                "Clinic ID: " + this.clinicID, style: TextStyle(
                 fontWeight: FontWeight.bold
             )
             ),
             Text(
-                "Daily Death Cases: " + this.deathCases
-            ),
-
-            Text(
-                "Daily New Cases: " + this.newCases
+                "Clinic Name: " + this.clinicName
             ),
             Text(
-                "Date: " + this.casesDate
+                "Contact Number: " + this.contactNo
+            ),
+            Text(
+                "Address: " + this.address
+            ),
+            Text(
+                "Vaccine Brand: " + this.vaccineBrand
+            ),
+            Text(
+                "Latitude: " + this.latitude
+            ),
+            Text(
+                "Longitude: " + this.longitude
             ),
           ],
         ),
-
       ),
     );
   }
@@ -580,19 +583,21 @@ class UpdatePage extends StatelessWidget {
               Card(child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Text("Case Id: " + this.caseID),
-                  Text("Daily Death Cases: " + this.deathCases),
-                  Text("Daily New Cases: " + this.newCases),
-                  Text("Date: " + this.casesDate)
+                  Text("Clinic Id: " + this.clinicID),
+                  Text("Clinic Name: " + this.clinicName),
+                  Text("Contact Number: " + this.contactNo),
+                  Text("Address: " + this.address),
+                  Text("Vaccine Brand: " + this.vaccineBrand),
+                  Text("Latitude: " + this.latitude),
+                  Text("Longitude: " + this.longitude),
                 ],),),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  const Text(
-                  'Daily Cases Update Form: ',
+                  'Update Clinic',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
                       color: Colors.black
-
                   ),
                 ),
               ),
@@ -600,14 +605,14 @@ class UpdatePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
-                  controller: newCasesController,
+                  controller: clinicNameController,
                   decoration: const InputDecoration(
-                    hintText: 'Enter daily new cases',
-                    labelText: 'Enter Daily New Cases',
+                    hintText: 'e.g. Fatimah',
+                    labelText: 'Clinic Name',
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'Please enter valid new cases amount';
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -617,14 +622,14 @@ class UpdatePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
-                  controller: deathCasesController,
+                  controller: contactNoController,
                   decoration: const InputDecoration(
-                    hintText: 'Enter Daily Death Cases',
-                    labelText: 'Enter Daily Death Cases',
+                    hintText: 'e.g. 012-3456789',
+                    labelText: 'Contact Number',
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'Please enter valid death cases amount';
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -634,14 +639,65 @@ class UpdatePage extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
-                  controller: dateController,
+                  controller: addressController,
                   decoration: const InputDecoration(
-                    hintText: 'Enter date in 2022-08-08 format',
-                    labelText: 'Enter Daily Cases Date',
+                    hintText: 'e.g. 48, Jalan Ipoh',
+                    labelText: 'Address',
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'Please enter valid date';
+                      return 'This field is required';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child:  TextFormField(
+                  controller: vaccineBrandController,
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. Pfizer',
+                    labelText: 'Vaccine Brand',
+                  ),
+                  validator: (value) {
+                    if (value == '') {
+                      return 'This field is required';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child:  TextFormField(
+                  controller: latitudeController,
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. 3.081213',
+                    labelText: 'Latitude',
+                  ),
+                  validator: (value) {
+                    if (value == '') {
+                      return 'This field is required';
+                    }
+                    return null;
+                  },
+                ),
+              ),
+
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                child:  TextFormField(
+                  controller: longitudeController,
+                  decoration: const InputDecoration(
+                    hintText: 'e.g. 101.5844108',
+                    labelText: 'Longitude',
+                  ),
+                  validator: (value) {
+                    if (value == '') {
+                      return 'This field is required';
                     }
                     return null;
                   },
@@ -654,15 +710,12 @@ class UpdatePage extends StatelessWidget {
                 backgroundColor: Colors.blueAccent,
                 child: const Icon(Icons.update),
                 onPressed: () {
-
-                  Navigator.pop(context, 'Cancel');
+                  updateClinic(this.clinicID, clinicNameController.text, contactNoController.text, addressController.text, vaccineBrandController.text, latitudeController.text, longitudeController.text );
+                  Navigator.pop(context, 'Cancel Update');
                 },
                 tooltip: 'Cancel!',
               ),
-
-
             ],
-
           )
       ),
     );
