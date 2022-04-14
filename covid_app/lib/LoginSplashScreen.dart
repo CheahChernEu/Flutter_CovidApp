@@ -124,7 +124,7 @@ class login extends State<LoginPage> {
 
                       if(emailController.text == "admin@gmail.com" && passwordController.text == "admin123"){
                         ScaffoldMessenger.of(context).showSnackBar(successMessage);
-                        Navigator.pushNamed(context, '/adminClinicDashboard');
+                        Navigator.pushNamed(context, '/adminDashboard');
                       }
                     }
 
