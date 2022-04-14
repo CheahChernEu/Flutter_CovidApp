@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'subscriber_series.dart';
-import 'subscriber_chart.dart';
+import 'death_cases_series.dart';
+import 'death_cases_chart.dart';
 
 class Cases {
   final String id;
@@ -601,41 +601,51 @@ class BarChart extends StatelessWidget {
         super(key: key);
   Future <List<Cases>> list;
 
-
-
-  final List<CasesSeries> data = [
-
-
-
-
-      CasesSeries(
-        day: "2008",
-        covid_death_cases: 3000,
-        barColor: charts.ColorUtil.fromDartColor(Colors.blue),
-      ),
-
-
-
-  ];
+  final List<CasesSeries> death_data = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-      body: Center(
+      body: Container(
+        padding: EdgeInsets.all(20),
+        margin: const EdgeInsets.only(left: 1.5, right: 1.5, top:40.0),
          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.start,
            crossAxisAlignment: CrossAxisAlignment.center,
 
             children: [
-              Text("Covid-19 Death Cases:", style: TextStyle(
-                  fontWeight: FontWeight.bold)),
+              FutureBuilder <List<Cases>>(
+                future: list,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Cases>? data = snapshot.data;
+                    for(Cases item in data!){
+                      death_data.add(  CasesSeries(
+                        day: item!.getCasesDate(),
+                        covid_death_cases: int.parse(item!.getDeathCases()),
+                          barColor:  (int.parse(item!.getDeathCases())<5000) ?  charts.ColorUtil.fromDartColor(Colors.blue):charts.ColorUtil.fromDartColor(Colors.red),
+                      ),);
+
+                    }
+                  } else if (snapshot.hasError) {
+                    return Text("${snapshot.error}");
+                  }
+                  // By default show a loading spinner.
+                  return Text("Covid-19 Death Cases:", style: TextStyle(
+                      fontWeight: FontWeight.bold));
+                },
+              ),
+
              CasesChart(
-                data: data,
+                data: death_data,
               )
     ],
       ),
     ),);
   }
 }
+
+
+
 
