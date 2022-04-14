@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 import 'homepage.dart';
 import 'adminDashboard.dart';
+import 'adminHomepage.dart';
 // import 'SecondRoutePage.dart';
 
 void main() {
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
         '/admin': (context) =>  const AdminPage(),
         '/adminDashboard': (context) => const Admin_Dashboard(),
         '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
+        '/adminHomepage': (context) => const AdminHomePage(),
         // '/third': (context) => const ThirdPageForm(),
         // '/fourth': (context) => const FourthPageForm(),
       },

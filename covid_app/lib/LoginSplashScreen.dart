@@ -110,13 +110,16 @@ class login extends State<LoginPage> {
 
                   onPressed: () {
                     final snackBar = SnackBar(
-                      content: const Text('Authenticating'),
+                      content: const Text('Loading...'),
                     );
 
                     final successMessage = SnackBar(
                       content: const Text('Successful Login!'),
                     );
 
+                    final failedMessage = SnackBar(
+                      content: const Text('Login Failed -- Please Try Again!'),
+                    );
                     // It returns true if the form is valid, otherwise returns false
                     if (_formKey.currentState!.validate()) {
                       // If the form is valid, display a Snackbar.
@@ -124,7 +127,9 @@ class login extends State<LoginPage> {
 
                       if(emailController.text == "admin@gmail.com" && passwordController.text == "admin123"){
                         ScaffoldMessenger.of(context).showSnackBar(successMessage);
-                        Navigator.pushNamed(context, '/adminClinicDashboard');
+                        Navigator.pushNamed(context, '/adminHomepage');
+                      } else {
+                      ScaffoldMessenger.of(context).showSnackBar(failedMessage);
                       }
                     }
 
