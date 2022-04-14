@@ -100,11 +100,13 @@ class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserve
   }
 
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text(DemoLocalizations.of(context).message!),
+        title: Text(DemoLocalizations.of(context).title),
       ),
       // Use a FutureBuilder to display a loading spinner while waiting for the
       // VideoPlayerController to finish initializing.
@@ -312,13 +314,13 @@ class DemoLocalizations {
   final Locale locale;
 
   static DemoLocalizations of(BuildContext context) {
-    return Localizations.of<DemoLocalizations>(context, DemoLocalizations)!;
+    return Localizations.of (context, DemoLocalizations);
   }
 
   static const _localizedValues = <String, Map<String, String>>{
     'en': {
       'title': 'Hello World',
-      'message': 'This is my first localization'
+      'message': 'Stay Healthy! Prevent Covid-19!'
     },
     'es': {
       'title': 'Hola Mundo',
@@ -374,7 +376,7 @@ class Demo extends StatelessWidget {
       // with the specified delegates. DemoLocalizations.of()
       // will only find the app's Localizations widget if its
       // context is a child of the app.
-
+      home: const HomePage(),
     );
   }
 }
