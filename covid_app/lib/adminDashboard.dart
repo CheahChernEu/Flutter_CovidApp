@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'subscriber_series.dart';
+import 'subscriber_chart.dart';
 
 class Cases {
   final String id;
@@ -181,7 +184,7 @@ class AdminDashboard extends State<Admin_Dashboard>  {
 
             AddCases(),
             CasesListing(list: futureData),
-           const Icon(Icons.add_chart_sharp),
+            BarChart(list: futureData),
           ],
         ),
       ),
@@ -339,26 +342,32 @@ class CasesListing extends StatelessWidget {
                               actions: <Widget>[
                                 new ElevatedButton(
                                   onPressed: () {
-                                    final snackBar = SnackBar(
-                                      content: const Text('Delete Successfully!'),
-                                    );
+
 
                                     showDialog(
                                       context: context,
                                       builder: (context) {
+                                        final snackBar = SnackBar(
+                                        content: const Text('Delete Successfully!'),
+                                      );
+
                                         return AlertDialog(
                                           // Retrieve the text the that user has entered by using the
                                           // TextEditingController.
-                                          content: Row(
+                                          title: const Text('Delete Alert:'),
+                                          content: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: <Widget>[
+                                                Text("Case Id: " + data![index].id),Text("Daily Death Cases: " + data![index].deathCases),
+                                                Text("Daily New Cases: " + data![index].newCases),
+                                                Text("Date: " + data![index].casesDate),
                                                 new ElevatedButton(
                                                 onPressed: () {
                                                   data?.removeAt(index);
                                                   deleteCase(item!.getId());
                                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                  Navigator.pop(context, 'Confirm');},
+                                                  Navigator.pop(context, 'Confirm Delete');},
                                                 child: const Text('Confirm'),
                                               ),
 
@@ -377,7 +386,7 @@ class CasesListing extends StatelessWidget {
                                     );
 
 
-                                    Navigator.pop(context, 'Delete');
+
 
                                   },
                                   child: const Text('Delete'),
@@ -571,7 +580,7 @@ class UpdatePage extends StatelessWidget {
                 backgroundColor: Colors.blueAccent,
                 child: const Icon(Icons.update),
                 onPressed: () {
-
+                  updateCase(this.caseID, newCasesController.text,deathCasesController.text,dateController.text );
                   Navigator.pop(context, 'Cancel');
                 },
                 tooltip: 'Cancel!',
@@ -583,6 +592,50 @@ class UpdatePage extends StatelessWidget {
           )
       ),
     );
+  }
+}
+
+
+class BarChart extends StatelessWidget {
+  BarChart({Key? key, required this.list }) :
+        super(key: key);
+  Future <List<Cases>> list;
+
+
+
+  final List<CasesSeries> data = [
+
+
+
+
+      CasesSeries(
+        day: "2008",
+        covid_death_cases: 3000,
+        barColor: charts.ColorUtil.fromDartColor(Colors.blue),
+      ),
+
+
+
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: Center(
+         child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+           crossAxisAlignment: CrossAxisAlignment.center,
+
+            children: [
+              Text("Covid-19 Death Cases:", style: TextStyle(
+                  fontWeight: FontWeight.bold)),
+             CasesChart(
+                data: data,
+              )
+    ],
+      ),
+    ),);
   }
 }
 
