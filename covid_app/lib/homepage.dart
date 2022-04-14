@@ -181,21 +181,25 @@ class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserve
                  ElevatedButton(
                   child: const Text('Guest'),
                   onPressed: () {
+                    final message = SnackBar(
+                      content: const Text('Loading to Public User Page...'),
+                    );
                     // It returns true if the form is valid, otherwise returns false
                     Navigator.pushNamed(context, '/publicUser');
 
-                    // Scaffold.of(context)
-                    //     .showSnackBar(SnackBar(content: Text('Continue as Guests')));
+                    ScaffoldMessenger.of(context).showSnackBar(message);
                   },
                 ),
 
                  ElevatedButton(
                   child: const Text('Admin'),
                   onPressed: () {
+                    final message = SnackBar(
+                      content: const Text('Loading to Admin Login Page...'),
+                    );
                     // It returns true if the form is valid, otherwise returns false
                     Navigator.pushNamed(context, '/admin');
-                    Scaffold.of(context)
-                        .showSnackBar(SnackBar(content: Text('Continue as Admin')));
+                    ScaffoldMessenger.of(context).showSnackBar(message);
                   },
                 ),
 
