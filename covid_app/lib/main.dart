@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         // When navigating to the "/" route, build the homePage widget.
         '/': (context) => const HomePage(),
         '/admin': (context) =>  const AdminPage(),
-        '/adminDashboard': (context) =>  const AdminDashboard(),
+        '/adminDashboard': (context) => const Admin_Dashboard(),
         // '/third': (context) => const ThirdPageForm(),
         // '/fourth': (context) => const FourthPageForm(),
       },
