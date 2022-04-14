@@ -1,3 +1,4 @@
+import 'package:covid_app/adminClinicDashboard.dart';
 import 'package:flutter/material.dart';
 import 'login.dart';
 import 'homepage.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/': (context) => const HomePage(),
         '/admin': (context) =>  const AdminPage(),
         '/adminDashboard': (context) => const Admin_Dashboard(),
+        '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
         // '/third': (context) => const ThirdPageForm(),
         // '/fourth': (context) => const FourthPageForm(),
       },
