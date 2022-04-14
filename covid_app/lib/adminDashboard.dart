@@ -5,6 +5,9 @@ import 'dart:convert';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'death_cases_series.dart';
 import 'death_cases_chart.dart';
+import 'new_cases_chart.dart';
+import 'new_cases_series.dart';
+
 
 class Cases {
   final String id;
@@ -166,18 +169,18 @@ class AdminDashboard extends State<Admin_Dashboard>  {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
               Tab(icon: Icon(Icons.add_location)),
-
+              Tab(icon: Icon(Icons.add_chart_outlined)),
               Tab(icon: Icon(Icons.add_chart_outlined)),
               Tab(icon: Icon(Icons.add_chart_outlined)),
             ],
           ),
-          title: const Text('Admin Dashboard'),
+          title: const Text('Daily Cases Management'),
         ),
         body: TabBarView(
           children: <Widget>[
@@ -185,6 +188,7 @@ class AdminDashboard extends State<Admin_Dashboard>  {
             AddCases(),
             CasesListing(list: futureData),
             BarChart(list: futureData),
+            newCasesBarChart(list: futureData),
           ],
         ),
       ),
@@ -646,6 +650,55 @@ class BarChart extends StatelessWidget {
   }
 }
 
+class newCasesBarChart extends StatelessWidget {
+  newCasesBarChart({Key? key, required this.list }) :
+        super(key: key);
+  Future <List<Cases>> list;
+
+  final List<newCasesSeries> new_data = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+
+      body: Container(
+        padding: EdgeInsets.all(20),
+        margin: const EdgeInsets.only(left: 1.5, right: 1.5, top:40.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+
+          children: [
+            FutureBuilder <List<Cases>>(
+              future: list,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  List<Cases>? data = snapshot.data;
+                  for(Cases item in data!){
+                    new_data.add(newCasesSeries(
+                      day: item!.getCasesDate(),
+                      covid_new_cases: int.parse(item!.getNewCases()),
+                      barColor: (int.parse(item!.getNewCases())<10000) ?  charts.ColorUtil.fromDartColor(Colors.purple):charts.ColorUtil.fromDartColor(Colors.red),
+                    ),);
+
+                  }
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }
+                // By default show a loading spinner.
+                return Text("Covid-19 Daily New Cases:", style: TextStyle(
+                    fontWeight: FontWeight.bold));
+              },
+            ),
+
+            newCasesChart(
+              data: new_data,
+            )
+          ],
+        ),
+      ),);
+  }
+}
 
 
 

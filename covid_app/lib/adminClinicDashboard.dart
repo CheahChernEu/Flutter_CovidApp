@@ -398,12 +398,12 @@ class DisplayClinics extends StatelessWidget {
                               showDialog<String>(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
-                                  title: const Text('Clinics:'),
+                                  title: const Text('Clinics Details:'),
                                   content: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: <Widget>[
-                                        Text("Clinic Id: " + data![index].clinicID),
+                                        Text("Clinic ID: " + data![index].clinicID),
                                         Text("Clinic Name: " + data![index].clinicName),
                                         Text("Contact Number: " + data![index].contactNo),
                                         Text("Address: " + data![index].address),
@@ -511,7 +511,7 @@ class ClinicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(3),
-      height: 150,
+      height: 200,
       width: 350,
       child: Card(
 
@@ -582,8 +582,9 @@ class UpdatePage extends StatelessWidget {
             children: <Widget>[
               Card(child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text("Clinic Id: " + this.clinicID),
+                  Text("Clinic ID: " + this.clinicID),
                   Text("Clinic Name: " + this.clinicName),
                   Text("Contact Number: " + this.contactNo),
                   Text("Address: " + this.address),
