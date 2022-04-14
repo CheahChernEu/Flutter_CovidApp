@@ -62,7 +62,7 @@ createClinics(String clinicName, String contactNo, String address, String vaccin
 
 
   final response = await http.post(
-      Uri.parse('http://192.168.1.6/phpInsert.php'),
+      Uri.parse('http://192.168.1.104/phpInsertClinic.php'),
       body: {
         'clinicName': clinicName,
         'contactNo': contactNo,
@@ -77,7 +77,7 @@ createClinics(String clinicName, String contactNo, String address, String vaccin
 
 Future <List<Clinics>> fetchData() async {
   final response =await http
-      .get(Uri.parse('http://192.168.1.6/convertjson.php'));
+      .get(Uri.parse('http://192.168.1.104/clinicConvertjson.php'));
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => new Clinics.fromJson(data)).toList();
@@ -90,7 +90,7 @@ Future <List<Clinics>> fetchData() async {
 
 deleteClinic(String clinicID) async {
   final http.Response response = await http.post(
-      Uri.parse('http://192.168.1.6/phpDelete.php'),
+      Uri.parse('http://192.168.1.104/phpDeleteClinic.php'),
       body:{
         'clinicID' : clinicID
       }
@@ -112,7 +112,7 @@ deleteClinic(String clinicID) async {
 
 updateClinic(String clinicID, String clinicName, String contactNo, String address, String vaccineBrand, String latitude, String longitude) async {
   final http.Response response = await http.post(
-      Uri.parse('http://192.168.1.6/phpUpdate.php'),
+      Uri.parse('http://192.168.1.104/phpUpdateClinic.php'),
       body:{
         'clinicID' : clinicID,
         'clinicName' : clinicName,
