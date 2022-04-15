@@ -9,6 +9,7 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:math';
 import 'main.dart';
 
+
 class Clinics {
   final String clinicID;
   final String clinicName;
@@ -67,7 +68,7 @@ class Clinics {
 
 Future <List<Clinics>> fetchData() async {
   final response =await http
-      .get(Uri.parse('http://192.168.1.104/clinicConvertjson.php'));
+      .get(Uri.parse('http://192.168.64.2/clinicConvertjson.php'));
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => new Clinics.fromJson(data)).toList();
@@ -140,7 +141,6 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
           polylineCoordinates[i+1].longitude);
     }
 
-
     setState(() {
       distance = totalDistance;
     });
@@ -172,7 +172,7 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
 
-   final List list = await futureData;
+    final List list = await futureData;
 
     setState(() {
       _markers.clear();
@@ -191,7 +191,7 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
     });
 
   }
-   _launchMapsUrl(double lat, double lng) async {
+  _launchMapsUrl(double lat, double lng) async {
     setState(() {
       endLocation = LatLng(lat, lng);
     });
@@ -200,8 +200,8 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
       markerId: MarkerId(startLocation.toString()),
       position: startLocation, //position of marker
       infoWindow: InfoWindow( //popup info
-        title: 'Starting Point ',
-        snippet: 'Start Marker',
+        title: DemoLocalizations.of(context).startingPoint,
+        snippet: DemoLocalizations.of(context).startMarker,
       ),
       icon: BitmapDescriptor.defaultMarker, //Icon for Marker
     ));
@@ -210,8 +210,8 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
       markerId: MarkerId(endLocation.toString()),
       position: endLocation, //position of marker
       infoWindow: InfoWindow( //popup info
-        title: 'Destination Point ',
-        snippet: 'Destination Marker',
+        title: DemoLocalizations.of(context).destinationPoint,
+        snippet: DemoLocalizations.of(context).destinationMarker,
       ),
       icon: BitmapDescriptor.defaultMarker, //Icon for Marker
     ));
@@ -231,145 +231,141 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
 
             children:[
 
-        Container(
-        height: MediaQuery.of(context).size.height / 2,
-        width: MediaQuery.of(context).size.width,
-              child: Stack ( children: [
-                GoogleMap(      onMapCreated: _onMapCreated,
-                  //Map widget from google_maps_flutter package
-                  zoomGesturesEnabled: true, //enable Zoom in, out on map
-                  initialCameraPosition: CameraPosition( //innital position in map
-                    target: startLocation, //initial position
-                    zoom: 15.0, //initial zoom level
+              Container(
+                height: MediaQuery.of(context).size.height / 2,
+                width: MediaQuery.of(context).size.width,
+                child: Stack ( children: [
+                  GoogleMap(      onMapCreated: _onMapCreated,
+                    //Map widget from google_maps_flutter package
+                    zoomGesturesEnabled: true, //enable Zoom in, out on map
+                    initialCameraPosition: CameraPosition( //innital position in map
+                      target: startLocation, //initial position
+                      zoom: 15.0, //initial zoom level
+                    ),
+
+                    markers: (distance == 0)?_markers.values.toSet():markers, //markers to show on map
+                    polylines: Set<Polyline>.of(polylines.values), //polylines
+                    mapType: MapType.normal, //map type
+
                   ),
-                  // _markers.values.toSet()
-                  markers:  markers, //markers to show on map
-                  polylines: Set<Polyline>.of(polylines.values), //polylines
-                  mapType: MapType.normal, //map type
 
-                ),
-
-                Positioned(
-                    top: 200,
-                    left: 45,
-                    child: Container(
-                        child: Card(
-                          child: Container(
-                              padding: EdgeInsets.all(3),
-                              child: Text(DemoLocalizations.of(context).totalDistance + distance.toStringAsFixed(2) + DemoLocalizations.of(context).km,
-                                  style: TextStyle(fontSize: 20, fontWeight:FontWeight.bold))
-                          ),
-                        )
-                    )
-                )
-              ],
-        ),),
+                  Positioned(
+                      top: 200,
+                      left: 45,
+                      child: Container(
+                          child: Card(
+                            child: Container(
+                                padding: EdgeInsets.all(3),
+                                child: Text(DemoLocalizations.of(context).totalDistance + distance.toStringAsFixed(2) + DemoLocalizations.of(context).km,
+                                    style: TextStyle(fontSize: 20, fontWeight:FontWeight.bold))
+                            ),
+                          )
+                      )
+                  )
+                ],
+                ),),
               SizedBox(
                 height: 10.0,
               ),
               Flexible(
-               child: FutureBuilder <List<Clinics>>(
-                 future: futureData,
-                 builder: (context, snapshot) {
-                   if (snapshot.hasData) {
-                     List<Clinics>? data = snapshot.data;
-                       return SingleChildScrollView(
-                         physics: ScrollPhysics(),
-                         child: ListView.builder(
-                             physics: const NeverScrollableScrollPhysics(),
-                             shrinkWrap: true,
+                child: FutureBuilder <List<Clinics>>(
+                  future: futureData,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      List<Clinics>? data = snapshot.data;
+                      return SingleChildScrollView(
+                        physics: ScrollPhysics(),
+                        child: ListView.builder(
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: data?.length,
+                            itemBuilder: (BuildContext context, int index) {
 
-                           itemCount: data?.length,
-                           itemBuilder: (BuildContext context, int index) {
+                              final item = data?[index];
+                              List<Clinics> clinics = [];
+                              for (int pointer = 0; pointer < data!.length-1; pointer++){
+                                var item1 = data[pointer];
+                                var item2 = data[pointer+1];
+                                double ele1 =  calculateDistance(startLocation.latitude, startLocation.longitude, item1!.getLatitude(), item1!.getLongitude());
+                                double ele2 = calculateDistance(startLocation.latitude, startLocation.longitude, item2!.getLatitude(), item2!.getLongitude());
+                                if(ele1 > ele2){
+                                  var temp = data[pointer];
+                                  data[pointer] = data[pointer+1];
+                                  data[pointer+1] = temp;
+                                  pointer = -1;
+                                }
+                                clinics.add(data[pointer]);
+                              }
 
+                              final clinicObj = clinics?[index];
 
+                              return Center(
+                                child: Card(
+                                  child: ListTile(
+                                    title: Text(data![index].clinicName),
+                                    subtitle: Column(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        SizedBox(
+                                          height: 3.0,
+                                        ),
+                                        Column( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            crossAxisAlignment: CrossAxisAlignment.stretch,
 
+                                            children: <Widget> [
+                                              Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                                                  child:  Text(DemoLocalizations.of(context).availableVaccine + clinicObj!.getVaccineBrand())
+                                              ),
+                                              Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                                                  child:  Text(DemoLocalizations.of(context).address + clinicObj!.getAddress())
+                                              ),
 
-                             for (int pointer = 0; pointer < data!.length-1; pointer++){
-                               var item1 = data[pointer];
-                               var item2 = data[pointer+1];
-                               double ele1 =  calculateDistance(startLocation.latitude, startLocation.longitude, item1!.getLatitude(), item1!.getLongitude());
-                               double ele2 = calculateDistance(startLocation.latitude, startLocation.longitude, item2!.getLatitude(), item2!.getLongitude());
-                               if(ele1 > ele2){
-                                 var temp = data[pointer];
-                                 data[pointer] = data[pointer+1];
-                                 data[pointer+1] = temp;
-                                 pointer = -1;
-                               }
-                               data.add(data[pointer]);
-                             }
-                             final item = data?[index];
+                                              Padding(
+                                                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                                                  child:  Text(DemoLocalizations.of(context).hotline + clinicObj!.getContactNo())
+                                              ),
+                                              Padding(
 
+                                                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
+                                                  child:  Text(DemoLocalizations.of(context).distance +  calculateDistance(startLocation.latitude, startLocation.longitude, clinicObj!.getLatitude(), clinicObj!.getLongitude()).toStringAsFixed(2).toString() +  DemoLocalizations.of(context).km)
+                                              ),
+                                            ]),
+                                        SizedBox(
+                                          height: 5.0,
+                                        ),
+                                      ],
+                                    ),
+                                    trailing: IconButton(
+                                      icon: Icon(Icons.directions),
+                                      color:
+                                      Theme.of(context).primaryColor,
+                                      onPressed: () {
 
-                             return Center(
-                               child: Card(
-                                 child: ListTile(
-                                   title: Text(data![index].clinicName),
-                                   subtitle: Column(
-                                     crossAxisAlignment:
-                                     CrossAxisAlignment.start,
-                                     children: <Widget>[
-                                       SizedBox(
-                                         height: 3.0,
-                                       ),
-                                       Column( mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                           crossAxisAlignment: CrossAxisAlignment.stretch,
+                                        _launchMapsUrl(clinicObj!.getLatitude(), clinicObj!.getLongitude());
 
-                                           children: <Widget> [
-                                         Padding(
-                                           padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                           child:  Text(DemoLocalizations.of(context).availableVaccine + item!.getVaccineBrand())
-                                           ),
-                                             Padding(
-                                                 padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                                 child:  Text(DemoLocalizations.of(context).address  + item!.getAddress())
-                                             ),
+                                      },
 
-                                         Padding(
-                                             padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                             child:  Text(DemoLocalizations.of(context).hotline  + item!.getContactNo())
-                                         ),
-                                             Padding(
+                                    ),
+                                  ),
+                                ),
 
-                                                 padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                                 child:  Text(DemoLocalizations.of(context).distance +  calculateDistance(startLocation.latitude, startLocation.longitude, item!.getLatitude(), item!.getLongitude()).toStringAsFixed(2).toString() +  DemoLocalizations.of(context).km)
-                                             ),
-
-
-                                       ]),
-                                       SizedBox(
-                                         height: 5.0,
-                                       ),
-                                     ],
-                                   ),
-                                   trailing: IconButton(
-                                     icon: Icon(Icons.directions),
-                                     color:
-                                     Theme.of(context).primaryColor,
-                                     onPressed: () {
-
-                                      _launchMapsUrl(item!.getLatitude(), item!.getLongitude());
-
-                                     },
-
-                                   ),
-                                 ),
-                               ),
-
-                             );
-                           }
-                       ),);
-                   } else if (snapshot.hasError) {
-                     return Text("${snapshot.error}");
-                   }
-                   // By default show a loading spinner.
-                   return const CircularProgressIndicator();
-                 },
-               ),
+                              );
+                            }
+                        ),);
+                    } else if (snapshot.hasError) {
+                      return Text("${snapshot.error}");
+                    }
+                    // By default show a loading spinner.
+                    return const CircularProgressIndicator();
+                  },
+                ),
               ),
             ]
         )
-      );
+    );
   }
 }
 

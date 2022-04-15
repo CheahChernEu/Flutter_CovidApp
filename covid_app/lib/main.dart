@@ -76,6 +76,10 @@ class DemoLocalizations {
       'address':'Address: ',
       'hotline':'Hotline: ',
       'distance':'Distance: ',
+      'startingPoint':'Starting Point',
+      'startMarker':'Start Marker',
+      'destinationPoint':'Destination Point',
+      'destinationMarker': 'Destination Marker',
     },
     'ms': {
       'title': 'Laman Utama Covid_App',
@@ -131,6 +135,10 @@ class DemoLocalizations {
       'address':'Alamat: ',
       'hotline':'Talian Hotline: ',
       'distance':'Jarak: ',
+      'startingPoint':'Titik Permulaan',
+      'startMarker':'Penanda Mula',
+      'destinationPoint':'Titik Destinasi',
+      'destinationMarker': 'Penanda Destinasi'
     },
 
     'zh': {
@@ -187,6 +195,10 @@ class DemoLocalizations {
       'address':"地址: ",
       'hotline':'热线: ',
       'distance':'距离: ',
+      'startingPoint':'起点',
+      'startMarker':'开始标记',
+      'destinationPoint':'目的地点',
+      'destinationMarker': '目的地标记',
     },
   };
 
@@ -401,6 +413,19 @@ class DemoLocalizations {
 
   String get newCasesChartHeading {
     return _localizedValues[locale.languageCode]!['newCasesChartHeading']!;
+  }
+
+  String get startingPoint {
+    return _localizedValues[locale.languageCode]!['startingPoint']!;
+  }
+  String get startMarker {
+    return _localizedValues[locale.languageCode]!['startMarker']!;
+  }
+  String get destinationPoint {
+    return _localizedValues[locale.languageCode]!['destinationPoint']!;
+  }
+  String get destinationMarker {
+    return _localizedValues[locale.languageCode]!['destinationMarker']!;
   }
 
 }
