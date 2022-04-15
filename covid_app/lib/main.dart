@@ -6,7 +6,7 @@ import 'adminDashboard.dart';
 import 'adminHomepage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
-import 'GoogleMap.dart';
+// import 'SecondRoutePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -50,14 +50,22 @@ class DemoLocalizations {
       'caseDateInputLabel': 'Enter Daily Cases Date',
       'caseDateInputHint': 'e.g. 2022-08-12',
       'caseDateInputValidation': 'Please enter valid date',
-      'addButton': 'Added Successfully!',
-      'vaccinationCentres': 'Covid_19 Vaccination Centres',
-      'totalDistance':'Total Distance: ',
-      'km':' KM',
-      'availableVaccine': 'Vaccine Available: ',
-      'address':'Address: ',
-      'hotline':'Hotline: ',
-      'distance':'Distance: ',
+      'addSuccessfullyButton': 'Added Successfully!',
+      'addFailedButton': 'Added Failed!',
+      'caseID': 'Case ID: ',
+      'deathCase': 'Daily Death Case: ',
+      'newCase': 'Daily New Case: ',
+      'date': 'Date: ',
+      'dailyCasesDetails' : 'Daily Cases Details: ',
+      'deleteSuccessfullyButton': 'Delete Successfully!',
+      'deleteAlert': 'Delete Alert：',
+      'deleteBtn' : 'Delete',
+      'confirmBtn': 'Confirm',
+      'cancelBtn': 'Cancel',
+      'updateBtn': 'Update',
+      'updateCaseDetails': 'Update Case Details: ',
+      'caseUpdateFormTitle': 'Daily Cases Update Form',
+
     },
     'ms': {
       'title': 'Laman Utama Covid_App',
@@ -87,14 +95,21 @@ class DemoLocalizations {
       'caseDateInputLabel': 'Masukkan Tarikh Kes Harian',
       'caseDateInputHint': 'cth. 2022-08-12',
       'caseDateInputValidation': 'Sila masukkan tarikh yang sah',
-      'addButton': 'Berjaya Ditambahkan!',
-      'vaccinationCentres' : 'Pusat Vaksinasi Covid-19',
-      'totalDistance':'Jumlah Jarak: ',
-      'km': ' KM',
-      'availableVaccine': 'Vaksin yang Tersedia: ',
-      'address':'Alamat: ',
-      'hotline':'Talian Hotline: ',
-      'distance':'Jarak: ',
+      'addSuccessfullyButton': 'Berjaya Ditambahkan!',
+      'addFailedButton': 'Gagal Ditambahkan!',
+      'caseID': 'Kes ID: ',
+      'deathCase': 'Kes Kematian Harian: ',
+      'newCase': 'Kes Baharu Harian: ',
+      'date': 'Tarikh: ',
+      'dailyCasesDetails' : 'Butiran Kes Harian : ',
+      'deleteSuccessfullyButton': 'Berjaya Dipadamkan!',
+      'deleteAlert': 'Amaran Pemadaman：',
+      'deleteBtn' : 'Memadamkan',
+      'confirmBtn': 'Mengesahkan',
+      'cancelBtn': 'Membatalkan',
+      'updateBtn': 'Kemas Kini',
+      'updateCaseDetails': 'Kemas Kini Butiran Kes: ',
+      'caseUpdateFormTitle': 'Borang Kemas Kini Kes Harian',
     },
 
     'zh': {
@@ -125,14 +140,22 @@ class DemoLocalizations {
       'caseDateInputLabel': '填入每日病例日期',
       'caseDateInputHint': '例如 2022-08-12',
       'caseDateInputValidation': '请填入正确的日期',
-      'addButton': '添加成功！',
-      'vaccinationCentres': 'Covid-19 疫苗接种中心',
-      'totalDistance':'总距离: ',
-      'km':" 公里",
-      'availableVaccine': "可用疫苗: ",
-      'address':"地址: ",
-      'hotline':'热线: ',
-      'distance':'距离: ',
+      'addSuccessfullyButton': '添加成功！',
+      'addFailedButton': '添加失败！',
+      'caseID': '病例 ID: ',
+      'deathCase': '每日死亡病例: ',
+      'newCase': '每日新增病例: ',
+      'date': '日期: ',
+      'dailyCasesDetails' : '每日病例详情 : ',
+      'deleteSuccessfullyButton': '删除成功！',
+      'deleteAlert': '删除警告：',
+      'deleteBtn' : '删除',
+      'confirmBtn': '确认',
+      'cancelBtn': '取消',
+      'updateBtn': '更新',
+      'updateCaseDetails': '更新病例详情: ',
+      'caseUpdateFormTitle': '每日病例更新表',
+
     },
   };
 
@@ -246,43 +269,65 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]!['caseDateInputValidation']!;
   }
 
-  String get addButton {
-    return _localizedValues[locale.languageCode]!['addButton']!;
+  String get addSuccessfullyButton {
+    return _localizedValues[locale.languageCode]!['addSuccessfullyButton']!;
   }
 
-  String get vaccinationCentres {
-    return _localizedValues[locale.languageCode]!['vaccinationCentres']!;
+  String get addFailedButton {
+    return _localizedValues[locale.languageCode]!['addFailedButton']!;
   }
 
-  String get totalDistance {
-    return _localizedValues[locale.languageCode]!['totalDistance']!;
+  String get caseID {
+    return _localizedValues[locale.languageCode]!['caseID']!;
   }
 
-  String get km {
-    return _localizedValues[locale.languageCode]!['km']!;
-  }
-  String get availableVaccine {
-    return _localizedValues[locale.languageCode]!['availableVaccine']!;
+  String get deathCase {
+    return _localizedValues[locale.languageCode]!['deathCase']!;
   }
 
-  String get address {
-    return _localizedValues[locale.languageCode]!['address']!;
+  String get newCase {
+    return _localizedValues[locale.languageCode]!['newCase']!;
   }
 
-  String get hotline {
-    return _localizedValues[locale.languageCode]!['hotline']!;
+  String get date {
+    return _localizedValues[locale.languageCode]!['date']!;
   }
 
-  String get distance {
-    return _localizedValues[locale.languageCode]!['distance']!;
+  String get dailyCasesDetails {
+    return _localizedValues[locale.languageCode]!['dailyCasesDetails']!;
   }
 
+  String get deleteSuccessfullyButton {
+    return _localizedValues[locale.languageCode]!['deleteSuccessfullyButton']!;
+  }
 
+  String get deleteAlert {
+    return _localizedValues[locale.languageCode]!['deleteAlert']!;
+  }
 
+  String get deleteBtn {
+    return _localizedValues[locale.languageCode]!['deleteBtn']!;
+  }
 
+  String get confirmBtn {
+    return _localizedValues[locale.languageCode]!['confirmBtn']!;
+  }
 
+  String get cancelBtn {
+    return _localizedValues[locale.languageCode]!['cancelBtn']!;
+  }
 
+  String get updateBtn {
+    return _localizedValues[locale.languageCode]!['updateBtn']!;
+  }
 
+  String get updateCaseDetails {
+    return _localizedValues[locale.languageCode]!['updateCaseDetails']!;
+  }
+
+  String get caseUpdateFormTitle {
+    return _localizedValues[locale.languageCode]!['caseUpdateFormTitle']!;
+  }
 
 }
 class DemoLocalizationsDelegate
@@ -331,7 +376,8 @@ class MyApp extends StatelessWidget {
         '/adminDashboard': (context) => const Admin_Dashboard(),
         '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
         '/adminHomepage': (context) => const AdminHomePage(),
-        '/publicUser': (context) => const MyGoogleMap(),
+        // '/third': (context) => const ThirdPageForm(),
+        // '/fourth': (context) => const FourthPageForm()
       },
     );
   }
