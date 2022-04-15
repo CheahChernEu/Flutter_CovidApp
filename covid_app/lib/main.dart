@@ -50,7 +50,20 @@ class DemoLocalizations {
       'caseDateInputLabel': 'Enter Daily Cases Date',
       'caseDateInputHint': 'e.g. 2022-08-12',
       'caseDateInputValidation': 'Please enter valid date',
-      'addButton': 'Added Successfully!',
+      'addSuccessfullyButton': 'Added Successfully!',
+      'addFailedButton': 'Added Failed!',
+      'caseID': 'Case ID: ',
+      'deathCase': 'Daily Death Case: ',
+      'newCase': 'Daily New Case: ',
+      'date': 'Date: ',
+      'dailyCasesDetails' : 'Daily Cases Details: ',
+      'deleteSuccessfullyButton': 'Delete Successfully!',
+      'deleteAlert': 'Delete Alert：',
+      'confirmBtn': 'Confirm',
+      'cancelBtn': 'Cancel',
+      'updateBtn': 'Update',
+      'updateCaseDetails': 'Update Case Details: ',
+      'caseUpdateFormTitle': 'Daily Cases Update Form',
 
     },
     'ms': {
@@ -81,7 +94,20 @@ class DemoLocalizations {
       'caseDateInputLabel': 'Masukkan Tarikh Kes Harian',
       'caseDateInputHint': 'cth. 2022-08-12',
       'caseDateInputValidation': 'Sila masukkan tarikh yang sah',
-      'addButton': 'Berjaya Ditambahkan!',
+      'addSuccessfullyButton': 'Berjaya Ditambahkan!',
+      'addFailedButton': 'Gagal Ditambahkan!',
+      'caseID': 'Kes ID: ',
+      'deathCase': 'Kes Kematian Harian: ',
+      'newCase': 'Kes Baharu Harian: ',
+      'date': 'Tarikh: ',
+      'dailyCasesDetails' : 'Butiran Kes Harian : ',
+      'deleteSuccessfullyButton': 'Berjaya Dipadamkan!',
+      'deleteAlert': 'Amaran Pemadaman：',
+      'confirmBtn': 'Mengesahkan',
+      'cancelBtn': 'Membatalkan',
+      'updateBtn': 'Kemas Kini',
+      'updateCaseDetails': 'Kemas Kini Butiran Kes: ',
+      'caseUpdateFormTitle': 'Borang Kemas Kini Kes Harian',
     },
 
     'zh': {
@@ -112,7 +138,21 @@ class DemoLocalizations {
       'caseDateInputLabel': '填入每日病例日期',
       'caseDateInputHint': '例如 2022-08-12',
       'caseDateInputValidation': '请填入正确的日期',
-      'addButton': '添加成功！',
+      'addSuccessfullyButton': '添加成功！',
+      'addFailedButton': '添加失败！',
+      'caseID': '病例 ID: ',
+      'deathCase': '每日死亡病例: ',
+      'newCase': '每日新增病例: ',
+      'date': '日期: ',
+      'dailyCasesDetails' : '每日病例详情 : ',
+      'deleteSuccessfullyButton': '删除成功！',
+      'deleteAlert': '删除警告：',
+      'confirmBtn': '确认',
+      'cancelBtn': '取消',
+      'updateBtn': '更新',
+      'updateCaseDetails': '更新病例详情: ',
+      'caseUpdateFormTitle': '每日病例更新表',
+
     },
   };
 
@@ -226,8 +266,60 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]!['caseDateInputValidation']!;
   }
 
-  String get addButton {
-    return _localizedValues[locale.languageCode]!['addButton']!;
+  String get addSuccessfullyButton {
+    return _localizedValues[locale.languageCode]!['addSuccessfullyButton']!;
+  }
+
+  String get addFailedButton {
+    return _localizedValues[locale.languageCode]!['addFailedButton']!;
+  }
+
+  String get caseID {
+    return _localizedValues[locale.languageCode]!['caseID']!;
+  }
+
+  String get deathCase {
+    return _localizedValues[locale.languageCode]!['deathCase']!;
+  }
+
+  String get newCase {
+    return _localizedValues[locale.languageCode]!['newCase']!;
+  }
+
+  String get date {
+    return _localizedValues[locale.languageCode]!['date']!;
+  }
+
+  String get dailyCasesDetails {
+    return _localizedValues[locale.languageCode]!['dailyCasesDetails']!;
+  }
+
+  String get deleteSuccessfullyButton {
+    return _localizedValues[locale.languageCode]!['deleteSuccessfullyButton']!;
+  }
+
+  String get deleteAlert {
+    return _localizedValues[locale.languageCode]!['deleteAlert']!;
+  }
+
+  String get confirmBtn {
+    return _localizedValues[locale.languageCode]!['confirmBtn']!;
+  }
+
+  String get cancelBtn {
+    return _localizedValues[locale.languageCode]!['cancelBtn']!;
+  }
+
+  String get updateBtn {
+    return _localizedValues[locale.languageCode]!['updateBtn']!;
+  }
+
+  String get updateCaseDetails {
+    return _localizedValues[locale.languageCode]!['updateCaseDetails']!;
+  }
+
+  String get caseUpdateFormTitle {
+    return _localizedValues[locale.languageCode]!['caseUpdateFormTitle']!;
   }
 
 }

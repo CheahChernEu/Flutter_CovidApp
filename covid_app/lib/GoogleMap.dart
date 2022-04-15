@@ -8,8 +8,6 @@ import 'dart:convert';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:math';
 
-import 'package:url_launcher/url_launcher.dart';
-
 
 
 class Clinics {
