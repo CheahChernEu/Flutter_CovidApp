@@ -9,6 +9,7 @@ import 'package:just_audio/just_audio.dart';
 import 'common.dart';
 import 'package:rxdart/rxdart.dart';
 import 'main.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
 
@@ -140,7 +141,7 @@ class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserve
 
               children: [
 
-                Text("Stay Healthy! Prevent Covid-19!",  textAlign: TextAlign.right, ),
+                Text(DemoLocalizations.of(context).message, textAlign: TextAlign.right, ),
 
                 // Expanded( child: Text("", textAlign: TextAlign.right,)),
                 Spacer(),
@@ -186,10 +187,10 @@ class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserve
               children: [
 
                 ElevatedButton(
-                  child: const Text('Guest'),
+                  child: Text(DemoLocalizations.of(context).clientBtn),
                   onPressed: () {
                     final message = SnackBar(
-                      content: const Text('Loading to Public User Page...'),
+                      content: LoadingFilling.square(),
                     );
                     // It returns true if the form is valid, otherwise returns false
                     Navigator.pushNamed(context, '/publicUser');
@@ -199,10 +200,10 @@ class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserve
                 ),
 
                 ElevatedButton(
-                  child: const Text('Admin'),
+                  child: Text(DemoLocalizations.of(context).adminBtn),
                   onPressed: () {
                     final message = SnackBar(
-                      content: const Text('Loading to Admin Login Page...'),
+                      content: LoadingFilling.square(),
                     );
                     // It returns true if the form is valid, otherwise returns false
                     Navigator.pushNamed(context, '/admin');

@@ -7,6 +7,7 @@ import 'death_cases_series.dart';
 import 'death_cases_chart.dart';
 import 'new_cases_chart.dart';
 import 'new_cases_series.dart';
+import 'main.dart';
 
 
 class Cases {
@@ -174,13 +175,13 @@ class AdminDashboard extends State<Admin_Dashboard>  {
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.add_location)),
-              Tab(icon: Icon(Icons.add_chart_outlined)),
-              Tab(icon: Icon(Icons.add_chart_outlined)),
-              Tab(icon: Icon(Icons.add_chart_outlined)),
+              Tab(icon: Icon(Icons.add_box_outlined)),
+              Tab(icon: Icon(Icons.view_list_outlined)),
+              Tab(icon: Icon(Icons.show_chart_outlined)),
+              Tab(icon: Icon(Icons.bar_chart_outlined)),
             ],
           ),
-          title: const Text('Daily Cases Management'),
+          title: Text(DemoLocalizations.of(context).caseBtn),
         ),
         body: TabBarView(
           children: <Widget>[
@@ -213,8 +214,7 @@ class AddCases extends StatelessWidget {
               children: <Widget> [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child:  const Text(
-                    'Daily Cases Submission Form: ',
+                  child:  Text(DemoLocalizations.of(context).caseFormTitle,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
                       color: Colors.black
 
@@ -226,13 +226,13 @@ class AddCases extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: newCasesController,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter daily new cases',
-                    labelText: 'Enter Daily New Cases',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).newCaseInputHint,
+                    labelText: DemoLocalizations.of(context).newCaseInputLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'Please enter valid new cases amount';
+                      return DemoLocalizations.of(context).newCaseInputValidation;
                     }
                     return null;
                   },
@@ -243,13 +243,13 @@ class AddCases extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: deathCasesController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter Daily Death Cases',
-                      labelText: 'Enter Daily Death Cases',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).deathCaseInputHint,
+                      labelText: DemoLocalizations.of(context).deathCaseInputLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'Please enter valid death cases amount';
+                        return DemoLocalizations.of(context).deathCaseInputValidation;
                       }
                       return null;
                     },
@@ -260,13 +260,13 @@ class AddCases extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: dateController,
-                    decoration: const InputDecoration(
-                      hintText: 'Enter date in 2022-08-08 format',
-                      labelText: 'Enter Daily Cases Date',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).caseDateInputHint,
+                      labelText: DemoLocalizations.of(context).caseDateInputLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'Please enter valid date';
+                        return DemoLocalizations.of(context).caseDateInputValidation;
                       }
                       return null;
                     },
@@ -291,7 +291,7 @@ class AddCases extends StatelessWidget {
               return AlertDialog(
                 // Retrieve the text the that user has entered by using the
                 // TextEditingController.
-                content: Text("Added successfully"),
+                content: Text(DemoLocalizations.of(context).addButton),
               );
             },
           );

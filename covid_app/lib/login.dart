@@ -2,6 +2,7 @@ import 'animation.dart';
 import 'LoginSplashScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'main.dart';
 
 
 
@@ -148,10 +149,10 @@ class _HomePageState extends State<AdminPage> with TickerProviderStateMixin{
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  FadeAnimation(1, Text("Welcome to Covid_App ",
+                  FadeAnimation(1, Text(DemoLocalizations.of(context).loginTitle,
                     style: TextStyle(color: Colors.white, fontSize: 50),)),
                   SizedBox(height: 15,),
-                  FadeAnimation(1.3, Text("We Provide The Best Covid-19 Services \nStay Happy Always",
+                  FadeAnimation(1.3, Text(DemoLocalizations.of(context).loginMessage,
                     style: TextStyle(color: Colors.white.withOpacity(.7), height: 1.4, fontSize: 20),)),
                   SizedBox(height: 180,),
                   FadeAnimation(1.6, AnimatedBuilder(

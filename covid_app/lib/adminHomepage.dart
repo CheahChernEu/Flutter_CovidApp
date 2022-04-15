@@ -3,6 +3,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'main.dart';
+import 'package:loading_animations/loading_animations.dart';
+
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({Key? key}) : super(key: key);
@@ -46,7 +49,7 @@ class _AdminScreenState extends State<AdminHomePage> with WidgetsBindingObserver
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Covid_App Homepage'),
+        title: Text(DemoLocalizations.of(context).adminHomepageTitle),
       ),
       // Use a FutureBuilder to display a loading spinner while waiting for the
       // VideoPlayerController to finish initializing.
@@ -78,7 +81,7 @@ class _AdminScreenState extends State<AdminHomePage> with WidgetsBindingObserver
 
               children: [
 
-                Text("Stay Healthy! Prevent Covid-19!",
+                Text(DemoLocalizations.of(context).message,
                   textAlign: TextAlign.right,),
 
                 // Expanded( child: Text("", textAlign: TextAlign.right,)),
@@ -116,10 +119,10 @@ class _AdminScreenState extends State<AdminHomePage> with WidgetsBindingObserver
               children: [
 
                 ElevatedButton(
-                  child: const Text('Daily Cases Management'),
+                  child: Text(DemoLocalizations.of(context).caseBtn),
                   onPressed: () {
                     final message = SnackBar(
-                      content: const Text('Loading to Daily Cases Management Dashboard...'),
+                      content: LoadingFilling.square(),
                     );
                     // It returns true if the form is valid, otherwise returns false
                     Navigator.pushNamed(context, '/adminDashboard');
@@ -129,10 +132,10 @@ class _AdminScreenState extends State<AdminHomePage> with WidgetsBindingObserver
                 ),
 
                 ElevatedButton(
-                  child: const Text('Clinic Management'),
+                  child: Text(DemoLocalizations.of(context).clinicBtn),
                   onPressed: () {
                     final message = SnackBar(
-                      content: const Text('Loading to Clinic Management Dashboard...'),
+                      content: LoadingFilling.square(),
                     );
                     // It returns true if the form is valid, otherwise returns false
                     Navigator.pushNamed(context, '/adminClinicDashboard');

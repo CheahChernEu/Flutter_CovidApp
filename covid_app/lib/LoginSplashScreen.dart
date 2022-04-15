@@ -1,5 +1,7 @@
 import 'animation.dart';
 import 'package:flutter/material.dart';
+import 'main.dart';
+import 'package:loading_animations/loading_animations.dart';
 import 'adminDashboard.dart';
 
 
@@ -45,12 +47,12 @@ class login extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new ElevatedButton(
-                child: const Text('Home'),
+                child: const  Icon(Icons.arrow_back),
                 onPressed: ( ) {
                   Navigator.pushNamed(context, '/');
                 },
               ),
-              FadeAnimation(1.2, Text("Login to Covid_App",
+              FadeAnimation(1.2, Text(DemoLocalizations.of(context).loginHeading,
                 style: TextStyle(color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),)),
               SizedBox(height: 30,),
               FadeAnimation(1.5, Container(
@@ -71,11 +73,11 @@ class login extends State<LoginPage> {
                             icon: const Icon(Icons.email),
                             border: InputBorder.none,
                             hintStyle: TextStyle(color: Colors.grey.withOpacity(.8)),
-                            hintText: "Enter your email"
+                            hintText: DemoLocalizations.of(context).loginEmail
                         ),
                         validator: (value) {
                           if (value == '') {
-                            return 'Please enter valid email address';
+                            return DemoLocalizations.of(context).emailValidation;
                           }
                           return null;
                         },
@@ -90,11 +92,11 @@ class login extends State<LoginPage> {
                             icon: const Icon(Icons.password),
                             border: InputBorder.none,
                             hintStyle: TextStyle(color: Colors.grey.withOpacity(.8)),
-                            hintText: "Enter your password"
+                            hintText: DemoLocalizations.of(context).loginPw
                         ),
                         validator: (value) {
                           if (value == '') {
-                            return 'Please enter valid password';
+                            return DemoLocalizations.of(context).pwValidation;
                           }
                           return null;
                         },
@@ -106,19 +108,19 @@ class login extends State<LoginPage> {
               SizedBox(height: 40,),
               FadeAnimation(1.8, Center(
                 child: ElevatedButton(
-                  child: const Text('Login'),
+                  child: Text(DemoLocalizations.of(context).loginText),
 
                   onPressed: () {
                     final snackBar = SnackBar(
-                      content: const Text('Loading...'),
+                      content: LoadingFilling.square()
                     );
 
                     final successMessage = SnackBar(
-                      content: const Text('Successful Login!'),
+                      content: Text(DemoLocalizations.of(context).successfulLoginAlert),
                     );
 
                     final failedMessage = SnackBar(
-                      content: const Text('Login Failed -- Please Try Again!'),
+                      content: Text(DemoLocalizations.of(context).failedLoginAlert),
                     );
                     // It returns true if the form is valid, otherwise returns false
                     if (_formKey.currentState!.validate()) {
