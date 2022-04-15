@@ -59,6 +59,7 @@ class DemoLocalizations {
       'dailyCasesDetails' : 'Daily Cases Details: ',
       'deleteSuccessfullyButton': 'Delete Successfully!',
       'deleteAlert': 'Delete Alert：',
+      'deleteBtn' : 'Delete',
       'confirmBtn': 'Confirm',
       'cancelBtn': 'Cancel',
       'updateBtn': 'Update',
@@ -103,6 +104,7 @@ class DemoLocalizations {
       'dailyCasesDetails' : 'Butiran Kes Harian : ',
       'deleteSuccessfullyButton': 'Berjaya Dipadamkan!',
       'deleteAlert': 'Amaran Pemadaman：',
+      'deleteBtn' : 'Memadamkan',
       'confirmBtn': 'Mengesahkan',
       'cancelBtn': 'Membatalkan',
       'updateBtn': 'Kemas Kini',
@@ -147,6 +149,7 @@ class DemoLocalizations {
       'dailyCasesDetails' : '每日病例详情 : ',
       'deleteSuccessfullyButton': '删除成功！',
       'deleteAlert': '删除警告：',
+      'deleteBtn' : '删除',
       'confirmBtn': '确认',
       'cancelBtn': '取消',
       'updateBtn': '更新',
@@ -300,6 +303,10 @@ class DemoLocalizations {
 
   String get deleteAlert {
     return _localizedValues[locale.languageCode]!['deleteAlert']!;
+  }
+
+  String get deleteBtn {
+    return _localizedValues[locale.languageCode]!['deleteBtn']!;
   }
 
   String get confirmBtn {

@@ -344,7 +344,7 @@ class CasesListing extends StatelessWidget {
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
-                              title: const Text('Daily Cases:'),
+                              title: Text(DemoLocalizations.of(context).dailyCasesDetails),
                               content: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -367,7 +367,7 @@ class CasesListing extends StatelessWidget {
                                       context: context,
                                       builder: (context) {
                                         final snackBar = SnackBar(
-                                        content: const Text('Delete Successfully!'),
+                                        content: Text(DemoLocalizations.of(context).deleteBtn),
                                       );
 
                                         return AlertDialog(
