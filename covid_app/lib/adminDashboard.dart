@@ -598,8 +598,10 @@ class UpdatePage extends StatelessWidget {
                 backgroundColor: Colors.blueAccent,
                 child: const Icon(Icons.update),
                 onPressed: () {
-                  updateCase(this.caseID, newCasesController.text,deathCasesController.text,dateController.text );
-                  Navigator.pop(context, DemoLocalizations.of(context).cancelBtn);
+                  if(newCasesController.text != '' && deathCasesController.text != '' && dateController.text != ''){
+                    updateCase(this.caseID, newCasesController.text,deathCasesController.text,dateController.text );
+                    Navigator.pop(context, DemoLocalizations.of(context).cancelBtn);
+                  }
                 },
                 tooltip: 'Cancel!',
               ),

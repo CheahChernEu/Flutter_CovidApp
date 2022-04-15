@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
-
+import 'main.dart';
 class Clinics {
   final String clinicID;
   final String clinicName;
@@ -194,11 +194,11 @@ class AdminClinicDashboard extends State<Admin_Clinic_Dashboard>  {
         appBar: AppBar(
           bottom: const TabBar(
             tabs: [
-              Tab(icon: Icon(Icons.add_location)),
-              Tab(icon: Icon(Icons.add_chart_outlined)),
+              Tab(icon: Icon(Icons.add_box_outlined)),
+              Tab(icon: Icon(Icons.view_list_outlined)),
             ],
           ),
-          title: const Text('Manage Clinics'),
+          title:  Text(DemoLocalizations.of(context).manageClinics),
         ),
         body: TabBarView(
           children: <Widget>[
@@ -231,8 +231,8 @@ class AddClinics extends StatelessWidget {
               children: <Widget> [
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child:  const Text(
-                    'Add New Clinics',
+                  child:  Text(
+                    DemoLocalizations.of(context).addNewClinics,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
                         color: Colors.black
 
@@ -244,13 +244,13 @@ class AddClinics extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: clinicNameController,
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. Fatimah',
-                      labelText: 'Clinic Name',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).clinicNameHint,
+                      labelText: DemoLocalizations.of(context).clinicNameLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'This field is required';
+                        return DemoLocalizations.of(context).requiredValidation;
                       }
                       return null;
                     },
@@ -261,13 +261,13 @@ class AddClinics extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: contactNoController,
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. 012-3456789',
-                      labelText: 'Contact Number',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).contactNoHint,
+                      labelText: DemoLocalizations.of(context).contactNoLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'This field is required';
+                        return DemoLocalizations.of(context).requiredValidation;
                       }
                       return null;
                     },
@@ -278,13 +278,13 @@ class AddClinics extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: addressController,
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. 48, Jalan Ipoh',
-                      labelText: 'Address',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).addressHint,
+                      labelText: DemoLocalizations.of(context).addressLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'This field is required';
+                        return DemoLocalizations.of(context).requiredValidation;
                       }
                       return null;
                     },
@@ -295,13 +295,13 @@ class AddClinics extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: vaccineBrandController,
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. Pfizer',
-                      labelText: 'Vaccine Brand',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).vaccineHint,
+                      labelText: DemoLocalizations.of(context).vaccineLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'This field is required';
+                        return DemoLocalizations.of(context).requiredValidation;
                       }
                       return null;
                     },
@@ -312,13 +312,13 @@ class AddClinics extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: latitudeController,
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. 3.081213',
-                      labelText: 'Latitude',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).latitudeHint,
+                      labelText: DemoLocalizations.of(context).latitudeLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'This field is required';
+                        return DemoLocalizations.of(context).requiredValidation;
                       }
                       return null;
                     },
@@ -329,13 +329,13 @@ class AddClinics extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                   child:  TextFormField(
                     controller: longitudeController,
-                    decoration: const InputDecoration(
-                      hintText: 'e.g. 101.5844108',
-                      labelText: 'Longitude',
+                    decoration: InputDecoration(
+                      hintText: DemoLocalizations.of(context).longitudeHint,
+                      labelText: DemoLocalizations.of(context).longitudeLabel,
                     ),
                     validator: (value) {
                       if (value == '') {
-                        return 'This field is required';
+                        return DemoLocalizations.of(context).requiredValidation;
                       }
                       return null;
                     },
@@ -351,24 +351,36 @@ class AddClinics extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         child: const Icon(Icons.add),
         onPressed: () {
-          createClinics(clinicNameController.text, contactNoController.text, addressController.text, vaccineBrandController.text, latitudeController.text, longitudeController.text);
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                // Retrieve the text the that user has entered by using the
-                // TextEditingController.
-                content: Text("Added successfully"),
-              );
-            },
-          );
+          if(clinicNameController.text != '' && contactNoController.text != '' && addressController.text != '' && vaccineBrandController.text != '' && latitudeController.text != '' && longitudeController.text != ''){
+            createClinics(clinicNameController.text, contactNoController.text, addressController.text, vaccineBrandController.text, latitudeController.text, longitudeController.text);
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  // Retrieve the text the that user has entered by using the
+                  // TextEditingController.
+                  content: Text(DemoLocalizations.of(context).addedSuccessfully),
+                );
+              },
+            );
+          }else{
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  // Retrieve the text the that user has entered by using the
+                  // TextEditingController.
+                  content: Text(DemoLocalizations.of(context).addFailedButton),
+                );
+              },
+            );
+          }
         },
-        tooltip: 'Show me the value!',
+        tooltip: DemoLocalizations.of(context).toolTip,
       ),
     );
   }
 }
-
 class DisplayClinics extends StatelessWidget {
   DisplayClinics({Key? key, required this.list }) :
         super(key: key);
@@ -398,18 +410,18 @@ class DisplayClinics extends StatelessWidget {
                               showDialog<String>(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
-                                  title: const Text('Clinics Details:'),
+                                  title: Text(DemoLocalizations.of(context).clinicDetails),
                                   content: Column(
                                       mainAxisAlignment: MainAxisAlignment.start,
                                       crossAxisAlignment: CrossAxisAlignment.stretch,
                                       children: <Widget>[
-                                        Text("Clinic ID: " + data![index].clinicID),
-                                        Text("Clinic Name: " + data![index].clinicName),
-                                        Text("Contact Number: " + data![index].contactNo),
-                                        Text("Address: " + data![index].address),
-                                        Text("Vaccine Brand: " + data![index].vaccineBrand),
-                                        Text("Latitude: " + data![index].latitude),
-                                        Text("Longitude: " + data![index].longitude),
+                                        Text(DemoLocalizations.of(context).clinicID + data![index].clinicID),
+                                        Text(DemoLocalizations.of(context).clinicName + data![index].clinicName),
+                                        Text(DemoLocalizations.of(context).contactNo + data![index].contactNo),
+                                        Text(DemoLocalizations.of(context).address + data![index].address),
+                                        Text(DemoLocalizations.of(context).vaccineBrand + data![index].vaccineBrand),
+                                        Text(DemoLocalizations.of(context).latitude + data![index].latitude),
+                                        Text(DemoLocalizations.of(context).longitude + data![index].longitude),
                                       ]
                                   ),
                                   actions: <Widget>[
@@ -419,38 +431,38 @@ class DisplayClinics extends StatelessWidget {
                                           context: context,
                                           builder: (context) {
                                             final snackBar = SnackBar(
-                                              content: const Text('Delete Successfully!'),
+                                              content: Text(DemoLocalizations.of(context).deleteSuccessfullyButton),
                                             );
                                             return AlertDialog(
                                               // Retrieve the text the that user has entered by using the
                                               // TextEditingController.
-                                              title: const Text('Delete Alert:'),
+                                              title: Text(DemoLocalizations.of(context).deleteAlert),
                                               content: Column(
                                                   mainAxisAlignment: MainAxisAlignment.start,
                                                   crossAxisAlignment: CrossAxisAlignment.stretch,
                                                   children: <Widget>[
-                                                    Text("Clinic Id: " + data![index].clinicID),
-                                                    Text("Clinic Name: " + data![index].clinicName),
-                                                    Text("Contact Number: " + data![index].contactNo),
-                                                    Text("Address: " + data![index].address),
-                                                    Text("Vaccine Brand: " + data![index].vaccineBrand),
-                                                    Text("Latitude: " + data![index].latitude),
-                                                    Text("Longitude: " + data![index].longitude),
+                                                    Text(DemoLocalizations.of(context).clinicID + data![index].clinicID),
+                                                    Text(DemoLocalizations.of(context).clinicName + data![index].clinicName),
+                                                    Text(DemoLocalizations.of(context).contactNo + data![index].contactNo),
+                                                    Text(DemoLocalizations.of(context).address + data![index].address),
+                                                    Text(DemoLocalizations.of(context).vaccineBrand + data![index].vaccineBrand),
+                                                    Text(DemoLocalizations.of(context).latitude + data![index].latitude),
+                                                    Text(DemoLocalizations.of(context).longitude + data![index].longitude),
                                                     new ElevatedButton(
                                                       onPressed: () {
                                                         data?.removeAt(index);
                                                         deleteClinic(item!.getClinicID());
                                                         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                        Navigator.pop(context, 'Confirm Delete');
+                                                        Navigator.pop(context, DemoLocalizations.of(context).confirmBtn);
                                                         },
-                                                      child: const Text('Confirm'),
+                                                      child: Text(DemoLocalizations.of(context).confirmBtn),
                                                     ),
 
                                                     new ElevatedButton(
                                                       onPressed: () {
-                                                        Navigator.pop(context, 'Cancel Delete');
+                                                        Navigator.pop(context, DemoLocalizations.of(context).cancelBtn);
                                                       },
-                                                      child: const Text('Cancel'),
+                                                      child: Text(DemoLocalizations.of(context).cancelBtn),
                                                     ),
                                                   ]
                                               ),
@@ -458,7 +470,7 @@ class DisplayClinics extends StatelessWidget {
                                           },
                                         );
                                       },
-                                      child: const Text('Delete'),
+                                      child: Text(DemoLocalizations.of(context).deleteBtn),
                                     ),
                                     new ElevatedButton(
                                       onPressed: () {
@@ -472,11 +484,11 @@ class DisplayClinics extends StatelessWidget {
                                         );
                                         // Navigator.pop(context, 'Update');
                                       },
-                                      child: const Text('Update'),
+                                      child: Text(DemoLocalizations.of(context).updateBtn),
                                     ),
                                     new ElevatedButton(
-                                      onPressed: () => Navigator.pop(context, 'Cancel Update'),
-                                      child: const Text('Cancel'),
+                                      onPressed: () => Navigator.pop(context, DemoLocalizations.of(context).updateBtn),
+                                      child: Text(DemoLocalizations.of(context).cancelBtn),
                                     ),
                                   ],
                                 ),
@@ -519,27 +531,27 @@ class ClinicCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text(
-                "Clinic ID: " + this.clinicID, style: TextStyle(
+                DemoLocalizations.of(context).clinicID + this.clinicID, style: TextStyle(
                 fontWeight: FontWeight.bold
             )
             ),
             Text(
-                "Clinic Name: " + this.clinicName
+                DemoLocalizations.of(context).clinicName + this.clinicName
             ),
             Text(
-                "Contact Number: " + this.contactNo
+                DemoLocalizations.of(context).contactNo + this.contactNo
             ),
             Text(
-                "Address: " + this.address
+                DemoLocalizations.of(context).address + this.address
             ),
             Text(
-                "Vaccine Brand: " + this.vaccineBrand
+                DemoLocalizations.of(context).vaccineBrand + this.vaccineBrand
             ),
             Text(
-                "Latitude: " + this.latitude
+                DemoLocalizations.of(context).latitude + this.latitude
             ),
             Text(
-                "Longitude: " + this.longitude
+                DemoLocalizations.of(context).longitude + this.longitude
             ),
           ],
         ),
@@ -572,7 +584,7 @@ class UpdatePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Details: '),
+        title: Text(DemoLocalizations.of(context).updateClinicDetails),
       ),
       body: SingleChildScrollView(
 
@@ -584,19 +596,19 @@ class UpdatePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text("Clinic ID: " + this.clinicID),
-                  Text("Clinic Name: " + this.clinicName),
-                  Text("Contact Number: " + this.contactNo),
-                  Text("Address: " + this.address),
-                  Text("Vaccine Brand: " + this.vaccineBrand),
-                  Text("Latitude: " + this.latitude),
-                  Text("Longitude: " + this.longitude),
+                  Text(DemoLocalizations.of(context).clinicID + this.clinicID),
+                  Text(DemoLocalizations.of(context).clinicName + this.clinicName),
+                  Text(DemoLocalizations.of(context).contactNo + this.contactNo),
+                  Text(DemoLocalizations.of(context).address + this.address),
+                  Text(DemoLocalizations.of(context).vaccineBrand + this.vaccineBrand),
+                  Text(DemoLocalizations.of(context).latitude + this.latitude),
+                  Text(DemoLocalizations.of(context).longitude + this.longitude),
                 ],),),
 
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                child:  const Text(
-                  'Update Clinic',
+                child:  Text(
+                  DemoLocalizations.of(context).clinicUpdateFormTitle,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
                       color: Colors.black
                   ),
@@ -607,13 +619,13 @@ class UpdatePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: clinicNameController,
-                  decoration: const InputDecoration(
-                    hintText: 'e.g. Fatimah',
-                    labelText: 'Clinic Name',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).clinicNameHint,
+                    labelText: DemoLocalizations.of(context).clinicNameLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'This field is required';
+                      return DemoLocalizations.of(context).requiredValidation;
                     }
                     return null;
                   },
@@ -624,13 +636,13 @@ class UpdatePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: contactNoController,
-                  decoration: const InputDecoration(
-                    hintText: 'e.g. 012-3456789',
-                    labelText: 'Contact Number',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).contactNoHint,
+                    labelText: DemoLocalizations.of(context).contactNoLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'This field is required';
+                      return DemoLocalizations.of(context).requiredValidation;
                     }
                     return null;
                   },
@@ -641,13 +653,13 @@ class UpdatePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: addressController,
-                  decoration: const InputDecoration(
-                    hintText: 'e.g. 48, Jalan Ipoh',
-                    labelText: 'Address',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).addressHint,
+                    labelText: DemoLocalizations.of(context).addressLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'This field is required';
+                      return DemoLocalizations.of(context).requiredValidation;
                     }
                     return null;
                   },
@@ -658,13 +670,13 @@ class UpdatePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: vaccineBrandController,
-                  decoration: const InputDecoration(
-                    hintText: 'e.g. Pfizer',
-                    labelText: 'Vaccine Brand',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).vaccineHint,
+                    labelText: DemoLocalizations.of(context).vaccineLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'This field is required';
+                      return DemoLocalizations.of(context).requiredValidation;
                     }
                     return null;
                   },
@@ -675,13 +687,13 @@ class UpdatePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: latitudeController,
-                  decoration: const InputDecoration(
-                    hintText: 'e.g. 3.081213',
-                    labelText: 'Latitude',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).latitudeHint,
+                    labelText: DemoLocalizations.of(context).latitudeLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'This field is required';
+                      return DemoLocalizations.of(context).requiredValidation;
                     }
                     return null;
                   },
@@ -692,13 +704,13 @@ class UpdatePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                 child:  TextFormField(
                   controller: longitudeController,
-                  decoration: const InputDecoration(
-                    hintText: 'e.g. 101.5844108',
-                    labelText: 'Longitude',
+                  decoration: InputDecoration(
+                    hintText: DemoLocalizations.of(context).longitudeHint,
+                    labelText: DemoLocalizations.of(context).longitudeLabel,
                   ),
                   validator: (value) {
                     if (value == '') {
-                      return 'This field is required';
+                      return DemoLocalizations.of(context).requiredValidation;
                     }
                     return null;
                   },
@@ -711,10 +723,12 @@ class UpdatePage extends StatelessWidget {
                 backgroundColor: Colors.blueAccent,
                 child: const Icon(Icons.update),
                 onPressed: () {
-                  updateClinic(this.clinicID, clinicNameController.text, contactNoController.text, addressController.text, vaccineBrandController.text, latitudeController.text, longitudeController.text );
-                  Navigator.pop(context, 'Cancel Update');
+                  if(clinicNameController.text != '' && contactNoController.text != '' && addressController.text != '' && vaccineBrandController.text != '' && latitudeController.text != '' && longitudeController.text != ''){
+                    updateClinic(this.clinicID, clinicNameController.text, contactNoController.text, addressController.text, vaccineBrandController.text, latitudeController.text, longitudeController.text );
+                    Navigator.pop(context, DemoLocalizations.of(context).cancelBtn);
+                  }
                 },
-                tooltip: 'Cancel!',
+                tooltip: DemoLocalizations.of(context).cancelBtn,
               ),
             ],
           )

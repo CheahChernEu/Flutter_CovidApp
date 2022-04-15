@@ -80,6 +80,33 @@ class DemoLocalizations {
       'startMarker':'Start Marker',
       'destinationPoint':'Destination Point',
       'destinationMarker': 'Destination Marker',
+      'toolTip':'Show me the value!',
+      'addedSuccessfully':'Added successfully',
+      'longitudeLabel':'Longitude',
+      'longitudeHint':'e.g. 101.5844108',
+      'latitudeLabel':'Latitude',
+      'latitudeHint':'e.g. 3.081213',
+      'vaccineLabel':'Vaccine Brand',
+      'vaccineHint':'e.g. Pfizer',
+      'addressLabel':'Address',
+      'addressHint':'e.g. 48, Jalan Ipoh',
+      'contactNoLabel':'Contact Number',
+      'contactNoHint':'e.g. 012-3456789',
+      'manageClinics':'Manage Clinics',
+      'addNewClinics':'Add New Clinics',
+      'clinicNameHint':'e.g. Fatimah',
+      'clinicNameLabel':'Clinic Name',
+      'requiredValidation':'The field is required',
+      'clinicID': 'Clinic ID: ',
+      'clinicName': 'Clinic Name: ',
+      'contactNo': 'Contact Number: ',
+      'vaccineBrand': 'Vaccine Brand: ',
+      'latitude': 'Latitude: ' ,
+      'longitude': 'Longitude: ',
+      'clinicDetails' : 'Clinic Details: ',
+      'updateClinicDetails': 'Update Clinic Details: ',
+      'clinicUpdateFormTitle': 'Clinic Update Form',
+
     },
     'ms': {
       'title': 'Laman Utama Covid_App',
@@ -138,9 +165,35 @@ class DemoLocalizations {
       'startingPoint':'Titik Permulaan',
       'startMarker':'Penanda Mula',
       'destinationPoint':'Titik Destinasi',
-      'destinationMarker': 'Penanda Destinasi'
-    },
+      'destinationMarker': 'Penanda Destinasi',
+      'toolTip':'Tunjukkan saya nilainya!',
+      'addedSuccessfully':'Berjaya ditambahkan',
+      'longitudeLabel':'Longitud',
+      'longitudeHint':'cth. 101.5844108',
+      'latitudeLabel':'Latitud',
+      'latitudeHint':'cth. 3.081213',
+      'vaccineLabel':'Jenama Vaksin',
+      'vaccineHint':'cth. Pfizer',
+      'addressLabel':'Alamat',
+      'addressHint':'cth. 48, Jalan Ipoh',
+      'contactNoLabel':'Nombor telefon',
+      'contactNoHint':'cth. 012-3456789',
+      'manageClinics':'Pengurusan Klinik',
+      'addNewClinics':'Tambah Klinik Baru',
+      'clinicNameHint':'cth. Fatimah',
+      'clinicNameLabel':'Nama Klinik',
+      'requiredValidation':'Medan diperlukan',
+      'clinicID': 'Klinik ID: ',
+      'clinicName': 'Nama Klinik: ',
+      'contactNo': 'Nombor telefon: ',
+      'vaccineBrand': 'Jenama Vaksin: ',
+      'latitude': 'Latitud: ' ,
+      'longitude': 'Longitud: ',
+      'clinicDetails' : 'Butiran Klinik: ',
+      'updateClinicDetails': 'Kemas Kini Butiran Klinik: ',
+      'clinicUpdateFormTitle': 'Borang Kemas Kini Klinik',
 
+  },
     'zh': {
       'title': 'Covid_App 主页',
       'message': '保持健康！防止新冠病毒',
@@ -199,6 +252,32 @@ class DemoLocalizations {
       'startMarker':'开始标记',
       'destinationPoint':'目的地点',
       'destinationMarker': '目的地标记',
+      'toolTip':'给我看价值！',
+      'addedSuccessfully':'添加成功',
+      'longitudeLabel':'经度',
+      'longitudeHint':'例如 101.5844108',
+      'latitudeLabel':'纬度',
+      'latitudeHint':'例如 3.081213',
+      'vaccineLabel':'疫苗品牌',
+      'vaccineHint':'例如 辉瑞',
+      'addressLabel':'地址',
+      'addressHint':'例如 48, 怡保路',
+      'contactNoLabel':'联系电话',
+      'contactNoHint':'例如 012-3456789',
+      'manageClinics':'管理诊所',
+      'addNewClinics':'添加新诊所',
+      'clinicNameHint':'例如 法蒂玛',
+      'clinicNameLabel':'诊所名称',
+      'requiredValidation':'该字段是必需的',
+      'clinicID': '诊所 ID: ',
+      'clinicName': '诊所名字: ',
+      'contactNo': '联络号码: ',
+      'vaccineBrand': '疫苗品牌: ',
+      'latitude': '纬度: ' ,
+      'longitude': '经度: ',
+      'clinicDetails': '诊所详情: ',
+      'updateClinicDetails': '更新诊所详情: ',
+      'clinicUpdateFormTitle': '诊所更新表',
     },
   };
 
@@ -427,6 +506,113 @@ class DemoLocalizations {
   String get destinationMarker {
     return _localizedValues[locale.languageCode]!['destinationMarker']!;
   }
+
+  String get addNewClinics{
+    return _localizedValues[locale.languageCode]!['addNewClinics']!;
+  }
+
+  String get manageClinics{
+    return _localizedValues[locale.languageCode]!['manageClinics']!;
+  }
+
+  String get clinicNameHint{
+    return _localizedValues[locale.languageCode]!['clinicNameHint']!;
+  }
+
+  String get clinicNameLabel{
+    return _localizedValues[locale.languageCode]!['clinicNameLabel']!;
+  }
+
+  String get requiredValidation{
+    return _localizedValues[locale.languageCode]!['requiredValidation']!;
+  }
+
+  String get toolTip{
+    return _localizedValues[locale.languageCode]!['toolTip']!;
+  }
+
+  String get addedSuccessfully{
+    return _localizedValues[locale.languageCode]!['addedSuccessfully']!;
+  }
+
+  String get longitudeLabel{
+    return _localizedValues[locale.languageCode]!['longitudeLabel']!;
+  }
+
+
+  String get longitudeHint{
+    return _localizedValues[locale.languageCode]!['longitudeHint']!;
+  }
+
+  String get latitudeLabel{
+    return _localizedValues[locale.languageCode]!['latitudeLabel']!;
+  }
+
+  String get latitudeHint{
+    return _localizedValues[locale.languageCode]!['latitudeHint']!;
+  }
+
+  String get vaccineLabel{
+    return _localizedValues[locale.languageCode]!['vaccineLabel']!;
+  }
+
+  String get vaccineHint{
+    return _localizedValues[locale.languageCode]!['vaccineHint']!;
+  }
+
+  String get addressLabel{
+    return _localizedValues[locale.languageCode]!['addressLabel']!;
+  }
+
+  String get addressHint{
+    return _localizedValues[locale.languageCode]!['addressHint']!;
+  }
+
+  String get contactNoLabel{
+    return _localizedValues[locale.languageCode]!['contactNoLabel']!;
+  }
+
+  String get contactNoHint{
+    return _localizedValues[locale.languageCode]!['contactNoHint']!;
+  }
+
+  String get clinicID {
+    return _localizedValues[locale.languageCode]!['clinicID']!;
+  }
+
+
+  String get clinicName {
+    return _localizedValues[locale.languageCode]!['clinicName']!;
+  }
+
+  String get contactNo {
+    return _localizedValues[locale.languageCode]!['contactNo']!;
+  }
+
+  String get vaccineBrand {
+    return _localizedValues[locale.languageCode]!['vaccineBrand']!;
+  }
+
+  String get latitude {
+    return _localizedValues[locale.languageCode]!['latitude']!;
+  }
+
+  String get longitude {
+    return _localizedValues[locale.languageCode]!['longitude']!;
+  }
+
+  String get clinicDetails {
+    return _localizedValues[locale.languageCode]!['clinicDetails']!;
+  }
+
+  String get updateClinicDetails {
+    return _localizedValues[locale.languageCode]!['updateClinicDetails']!;
+  }
+
+  String get clinicUpdateFormTitle {
+    return _localizedValues[locale.languageCode]!['clinicUpdateFormTitle']!;
+  }
+
 
 }
 class DemoLocalizationsDelegate
