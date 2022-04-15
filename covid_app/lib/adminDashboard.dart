@@ -284,17 +284,30 @@ class AddCases extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         child: const Icon(Icons.add),
         onPressed: () {
-          createCases(newCasesController.text, deathCasesController.text, dateController.text);
-          showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                // Retrieve the text the that user has entered by using the
-                // TextEditingController.
-                content: Text(DemoLocalizations.of(context).addSuccessfullyButton),
-              );
-            },
-          );
+         if(newCasesController.text != '' && deathCasesController.text != '' && dateController.text != ''){
+           createCases(newCasesController.text, deathCasesController.text, dateController.text);
+           showDialog(
+             context: context,
+             builder: (context) {
+               return AlertDialog(
+                 // Retrieve the text the that user has entered by using the
+                 // TextEditingController.
+                 content: Text(DemoLocalizations.of(context).addSuccessfullyButton),
+               );
+             },
+           );
+         }else{
+           showDialog(
+             context: context,
+             builder: (context) {
+               return AlertDialog(
+                 // Retrieve the text the that user has entered by using the
+                 // TextEditingController.
+                 content: Text(DemoLocalizations.of(context).addFailedButton),
+               );
+             },
+           );
+         }
         },
         tooltip: 'Show me the value!',
       ),
@@ -502,7 +515,7 @@ class UpdatePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(DemoLocalizations.of(context).updateCaseDetails),
       ),
-      body: Center(
+      body: SingleChildScrollView(
 
           child: new Column(
             mainAxisAlignment:  MainAxisAlignment.spaceEvenly,
