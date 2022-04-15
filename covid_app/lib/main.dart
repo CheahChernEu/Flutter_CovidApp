@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 import 'homepage.dart';
 import 'adminDashboard.dart';
+import 'GoogleMap.dart';
 import 'adminHomepage.dart';
-// import 'SecondRoutePage.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -16,19 +17,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
       title: 'Navigation Screens',
       initialRoute: '/',
       routes: {
         // When navigating to the "/" route, build the homePage widget.
-        '/': (context) => const Demo(),
+        '/': (context) => const HomePage(),
         '/admin': (context) =>  const AdminPage(),
         '/adminDashboard': (context) => const Admin_Dashboard(),
-        '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
         '/adminHomepage': (context) => const AdminHomePage(),
-        // '/third': (context) => const ThirdPageForm(),
-        // '/fourth': (context) => const FourthPageForm(),
+        '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
+        '/publicUser': (context) => const MyGoogleMap(),
       },
+
     );
   }
 }

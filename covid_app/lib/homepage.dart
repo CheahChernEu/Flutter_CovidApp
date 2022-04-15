@@ -14,7 +14,6 @@ import 'package:flutter/foundation.dart' show SynchronousFuture;
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
-
   @override
   _VideoPlayerScreenState createState() => _VideoPlayerScreenState();
 }
@@ -100,13 +99,11 @@ class _VideoPlayerScreenState extends State<HomePage> with WidgetsBindingObserve
   }
 
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(DemoLocalizations.of(context).title),
+        title:  Text("Covid_App Homepage"),
       ),
       // Use a FutureBuilder to display a loading spinner while waiting for the
       // VideoPlayerController to finish initializing.
@@ -314,7 +311,7 @@ class DemoLocalizations {
   final Locale locale;
 
   static DemoLocalizations of(BuildContext context) {
-    return Localizations.of (context, DemoLocalizations);
+    return Localizations.of(context, DemoLocalizations)!;
   }
 
   static const _localizedValues = <String, Map<String, String>>{
@@ -355,31 +352,36 @@ class DemoLocalizationsDelegate
   @override
   bool shouldReload(DemoLocalizationsDelegate old) => false;
 }
-class Demo extends StatelessWidget {
-  const Demo({Key? key}) : super(key: key);
+// class Demo extends StatelessWidget {
+//   const Demo({Key? key}) : super(key: key);
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(body:
+//     MaterialApp(
+//       onGenerateTitle: (BuildContext context) =>
+//       DemoLocalizations.of(context).title,
+//       localizationsDelegates: const [
+//         DemoLocalizationsDelegate(),
+//         GlobalMaterialLocalizations.delegate,
+//         GlobalWidgetsLocalizations.delegate,
+//       ],
+//       supportedLocales: const [
+//         Locale('en', ''),
+//         Locale('es', ''),
+//       ],
+//       // Watch out: MaterialApp creates a Localizations widget
+//       // with the specified delegates. DemoLocalizations.of()
+//       // will only find the app's Localizations widget if its
+//       // context is a child of the app.
+//       home: const HomePage(),
+//
+//     ),);
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateTitle: (BuildContext context) =>
-      DemoLocalizations.of(context).title,
-      localizationsDelegates: const [
-        DemoLocalizationsDelegate(),
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('en', ''),
-        Locale('es', ''),
-      ],
-      // Watch out: MaterialApp creates a Localizations widget
-      // with the specified delegates. DemoLocalizations.of()
-      // will only find the app's Localizations widget if its
-      // context is a child of the app.
-      home: const HomePage(),
-    );
-  }
-}
+
+
+// }
 
 
 
