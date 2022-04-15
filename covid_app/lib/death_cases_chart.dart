@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'death_cases_series.dart';
+import 'main.dart';
 
 class CasesChart extends StatelessWidget {
   final List<CasesSeries> data;
@@ -28,7 +29,7 @@ class CasesChart extends StatelessWidget {
           child: Column(
             children: <Widget>[
               Text(
-                "Covid-19 Cases by Date",
+                DemoLocalizations.of(context).deathCasesChartHeading,
                 style: Theme.of(context).textTheme.bodyText2,
               ),
               Expanded(

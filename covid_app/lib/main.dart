@@ -65,6 +65,10 @@ class DemoLocalizations {
       'updateBtn': 'Update',
       'updateCaseDetails': 'Update Case Details: ',
       'caseUpdateFormTitle': 'Daily Cases Update Form',
+      'deathCasesChartTitle': 'Covid-19 Death Cases Chart:',
+      'newCasesChartTitle': 'Covid-19 New Cases Chart:',
+      'deathCasesChartHeading': 'Covid-19 Death Cases by Date',
+      'newCasesChartHeading': 'Covid-19 New Cases by Date',
 
     },
     'ms': {
@@ -110,6 +114,10 @@ class DemoLocalizations {
       'updateBtn': 'Kemas Kini',
       'updateCaseDetails': 'Kemas Kini Butiran Kes: ',
       'caseUpdateFormTitle': 'Borang Kemas Kini Kes Harian',
+      'deathCasesChartTitle': 'Carta Kes Kematian Covid-19:',
+      'newCasesChartTitle': 'Carta Kes Baharu Covid-19:',
+      'deathCasesChartHeading': 'Kes Kematian Covid-19 mengikut Tarikh',
+      'newCasesChartHeading': 'Kes Baharu Covid-19 mengikut Tarikh',
     },
 
     'zh': {
@@ -155,7 +163,10 @@ class DemoLocalizations {
       'updateBtn': '更新',
       'updateCaseDetails': '更新病例详情: ',
       'caseUpdateFormTitle': '每日病例更新表',
-
+      'deathCasesChartTitle': '新冠病毒死亡病例图表:',
+      'newCasesChartTitle': '新冠病毒新增病例图表:',
+      'deathCasesChartHeading': '按日期划分的新冠病毒死亡病例',
+      'newCasesChartHeading': '按日期划分的新冠病毒新增病例',
     },
   };
 
@@ -327,6 +338,22 @@ class DemoLocalizations {
 
   String get caseUpdateFormTitle {
     return _localizedValues[locale.languageCode]!['caseUpdateFormTitle']!;
+  }
+
+  String get deathCasesChartTitle {
+    return _localizedValues[locale.languageCode]!['deathCasesChartTitle']!;
+  }
+
+  String get newCasesChartTitle {
+    return _localizedValues[locale.languageCode]!['newCasesChartTitle']!;
+  }
+
+  String get deathCasesChartHeading {
+    return _localizedValues[locale.languageCode]!['deathCasesChartHeading']!;
+  }
+
+  String get newCasesChartHeading {
+    return _localizedValues[locale.languageCode]!['newCasesChartHeading']!;
   }
 
 }

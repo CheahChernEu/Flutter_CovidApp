@@ -120,7 +120,7 @@ updateCase(String id, String newCases, String deathCases, String caseDate) async
   } else {
     // If the server did not return a "200 OK response",
     // then throw an exception.
-    throw Exception('Failed to delete daily case.');
+    throw Exception('Failed to update daily case.');
   }
 }
 
@@ -361,8 +361,6 @@ class CasesListing extends StatelessWidget {
                               actions: <Widget>[
                                 new ElevatedButton(
                                   onPressed: () {
-
-
                                     showDialog(
                                       context: context,
                                       builder: (context) {
@@ -373,7 +371,7 @@ class CasesListing extends StatelessWidget {
                                         return AlertDialog(
                                           // Retrieve the text the that user has entered by using the
                                           // TextEditingController.
-                                          title: const Text('Delete Alert:'),
+                                          title: Text(DemoLocalizations.of(context).deleteAlert),
                                           content: Column(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -387,16 +385,16 @@ class CasesListing extends StatelessWidget {
                                                   data?.removeAt(index);
                                                   deleteCase(item!.getId());
                                                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                                                  Navigator.pop(context, 'Confirm Delete');},
-                                                child: const Text('Confirm'),
+                                                  Navigator.pop(context,DemoLocalizations.of(context).confirmBtn);},
+                                                child: Text(DemoLocalizations.of(context).confirmBtn),
                                               ),
 
                                                 new ElevatedButton(
                                                   onPressed: () {
 
-                                                    Navigator.pop(context, 'Cancel');
+                                                    Navigator.pop(context, DemoLocalizations.of(context).cancelBtn);
                                                     },
-                                                  child: const Text('Cancel'),
+                                                  child: Text(DemoLocalizations.of(context).cancelBtn),
                                                 ),
 
                                               ]
@@ -409,7 +407,7 @@ class CasesListing extends StatelessWidget {
 
 
                                   },
-                                  child: const Text('Delete'),
+                                  child: Text(DemoLocalizations.of(context).deleteBtn),
                                 ),
                                 new ElevatedButton(
                                   onPressed: () {
@@ -425,12 +423,12 @@ class CasesListing extends StatelessWidget {
 
                                     // Navigator.pop(context, 'Update');
                                     },
-                                  child: const Text('Update'),
+                                  child: Text(DemoLocalizations.of(context).updateBtn),
 
                                 ),
                                 new ElevatedButton(
-                                  onPressed: () => Navigator.pop(context, 'Cancel'),
-                                  child: const Text('Cancel'),
+                                  onPressed: () => Navigator.pop(context, DemoLocalizations.of(context).cancelBtn),
+                                  child: Text(DemoLocalizations.of(context).cancelBtn),
                                 ),
                               ],
 
@@ -515,7 +513,7 @@ class UpdatePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Update Details: '),
+        title: Text(DemoLocalizations.of(context).updateCaseDetails),
       ),
       body: Center(
 
@@ -534,8 +532,8 @@ class UpdatePage extends StatelessWidget {
 
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                              child:  const Text(
-                                'Daily Cases Update Form: ',
+                              child:  Text(
+                                DemoLocalizations.of(context).caseUpdateFormTitle,
                                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20,
                                     color: Colors.black
 
@@ -601,7 +599,7 @@ class UpdatePage extends StatelessWidget {
                 child: const Icon(Icons.update),
                 onPressed: () {
                   updateCase(this.caseID, newCasesController.text,deathCasesController.text,dateController.text );
-                  Navigator.pop(context, 'Cancel');
+                  Navigator.pop(context, DemoLocalizations.of(context).cancelBtn);
                 },
                 tooltip: 'Cancel!',
               ),
@@ -652,7 +650,7 @@ class BarChart extends StatelessWidget {
                     return Text("${snapshot.error}");
                   }
                   // By default show a loading spinner.
-                  return Text("Covid-19 Death Cases:", style: TextStyle(
+                  return Text(DemoLocalizations.of(context).deathCasesChartTitle, style: TextStyle(
                       fontWeight: FontWeight.bold));
                 },
               ),
@@ -702,7 +700,7 @@ class newCasesBarChart extends StatelessWidget {
                   return Text("${snapshot.error}");
                 }
                 // By default show a loading spinner.
-                return Text("Covid-19 Daily New Cases:", style: TextStyle(
+                return Text(DemoLocalizations.of(context).newCasesChartTitle, style: TextStyle(
                     fontWeight: FontWeight.bold));
               },
             ),
