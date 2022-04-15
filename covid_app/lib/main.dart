@@ -6,7 +6,7 @@ import 'adminDashboard.dart';
 import 'adminHomepage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
-// import 'SecondRoutePage.dart';
+import 'GoogleMap.dart';
 
 void main() {
   runApp(const MyApp());
@@ -69,7 +69,13 @@ class DemoLocalizations {
       'newCasesChartTitle': 'Covid-19 New Cases Chart:',
       'deathCasesChartHeading': 'Covid-19 Death Cases by Date',
       'newCasesChartHeading': 'Covid-19 New Cases by Date',
-
+      'vaccinationCentres': 'Covid_19 Vaccination Centres',
+      'totalDistance':'Total Distance: ',
+      'km':' KM',
+      'availableVaccine': 'Vaccine Available: ',
+      'address':'Address: ',
+      'hotline':'Hotline: ',
+      'distance':'Distance: ',
     },
     'ms': {
       'title': 'Laman Utama Covid_App',
@@ -118,6 +124,13 @@ class DemoLocalizations {
       'newCasesChartTitle': 'Carta Kes Baharu Covid-19:',
       'deathCasesChartHeading': 'Kes Kematian Covid-19 mengikut Tarikh',
       'newCasesChartHeading': 'Kes Baharu Covid-19 mengikut Tarikh',
+      'vaccinationCentres' : 'Pusat Vaksinasi Covid-19',
+      'totalDistance':'Jumlah Jarak: ',
+      'km': ' KM',
+      'availableVaccine': 'Vaksin yang Tersedia: ',
+      'address':'Alamat: ',
+      'hotline':'Talian Hotline: ',
+      'distance':'Jarak: ',
     },
 
     'zh': {
@@ -167,6 +180,13 @@ class DemoLocalizations {
       'newCasesChartTitle': '新冠病毒新增病例图表:',
       'deathCasesChartHeading': '按日期划分的新冠病毒死亡病例',
       'newCasesChartHeading': '按日期划分的新冠病毒新增病例',
+      'vaccinationCentres': 'Covid-19 疫苗接种中心',
+      'totalDistance':'总距离: ',
+      'km':" 公里",
+      'availableVaccine': "可用疫苗: ",
+      'address':"地址: ",
+      'hotline':'热线: ',
+      'distance':'距离: ',
     },
   };
 
@@ -340,6 +360,33 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]!['caseUpdateFormTitle']!;
   }
 
+  String get vaccinationCentres {
+    return _localizedValues[locale.languageCode]!['vaccinationCentres']!;
+  }
+
+  String get totalDistance {
+    return _localizedValues[locale.languageCode]!['totalDistance']!;
+  }
+
+  String get km {
+    return _localizedValues[locale.languageCode]!['km']!;
+  }
+  String get availableVaccine {
+    return _localizedValues[locale.languageCode]!['availableVaccine']!;
+  }
+
+  String get address {
+    return _localizedValues[locale.languageCode]!['address']!;
+  }
+
+  String get hotline {
+    return _localizedValues[locale.languageCode]!['hotline']!;
+  }
+
+  String get distance {
+    return _localizedValues[locale.languageCode]!['distance']!;
+  }
+
   String get deathCasesChartTitle {
     return _localizedValues[locale.languageCode]!['deathCasesChartTitle']!;
   }
@@ -403,8 +450,7 @@ class MyApp extends StatelessWidget {
         '/adminDashboard': (context) => const Admin_Dashboard(),
         '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
         '/adminHomepage': (context) => const AdminHomePage(),
-        // '/third': (context) => const ThirdPageForm(),
-        // '/fourth': (context) => const FourthPageForm()
+        '/publicUser': (context) => const MyGoogleMap(),
       },
     );
   }
