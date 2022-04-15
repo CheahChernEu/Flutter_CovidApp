@@ -7,10 +7,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:math';
-
-import 'package:url_launcher/url_launcher.dart';
-
-
+import 'main.dart';
 
 class Clinics {
   final String clinicID;
@@ -227,7 +224,7 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Covid-19 Vaccination Centres'),
+          title:  Text(DemoLocalizations.of(context).vaccinationCentres),
           backgroundColor: Colors.blue[700],
         ),
         body: Column(
@@ -259,7 +256,7 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                         child: Card(
                           child: Container(
                               padding: EdgeInsets.all(3),
-                              child: Text("Total Distance: " + distance.toStringAsFixed(2) + " KM",
+                              child: Text(DemoLocalizations.of(context).totalDistance + distance.toStringAsFixed(2) + DemoLocalizations.of(context).km,
                                   style: TextStyle(fontSize: 20, fontWeight:FontWeight.bold))
                           ),
                         )
@@ -281,11 +278,13 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                          child: ListView.builder(
                              physics: const NeverScrollableScrollPhysics(),
                              shrinkWrap: true,
+
                            itemCount: data?.length,
                            itemBuilder: (BuildContext context, int index) {
 
-                               final item = data?[index];
-                             List<Clinics> clinics = [];
+
+
+
                              for (int pointer = 0; pointer < data!.length-1; pointer++){
                                var item1 = data[pointer];
                                var item2 = data[pointer+1];
@@ -297,10 +296,10 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                                  data[pointer+1] = temp;
                                  pointer = -1;
                                }
-                               clinics.add(data[pointer]);
+                               data.add(data[pointer]);
                              }
+                             final item = data?[index];
 
-                             final clinicObj = clinics?[index];
 
                              return Center(
                                child: Card(
@@ -319,21 +318,21 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                                            children: <Widget> [
                                          Padding(
                                            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                           child:  Text("Vaccine Available: " + clinicObj!.getVaccineBrand())
+                                           child:  Text(DemoLocalizations.of(context).availableVaccine + item!.getVaccineBrand())
                                            ),
                                              Padding(
                                                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                                 child:  Text("Address: " + clinicObj!.getAddress())
+                                                 child:  Text(DemoLocalizations.of(context).address  + item!.getAddress())
                                              ),
 
                                          Padding(
                                              padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                             child:  Text("Hotline: " + clinicObj!.getContactNo())
+                                             child:  Text(DemoLocalizations.of(context).hotline  + item!.getContactNo())
                                          ),
                                              Padding(
 
                                                  padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 2),
-                                                 child:  Text("Distance : " +  calculateDistance(startLocation.latitude, startLocation.longitude, clinicObj!.getLatitude(), clinicObj!.getLongitude()).toStringAsFixed(2).toString() +  " KM")
+                                                 child:  Text(DemoLocalizations.of(context).distance +  calculateDistance(startLocation.latitude, startLocation.longitude, item!.getLatitude(), item!.getLongitude()).toStringAsFixed(2).toString() +  DemoLocalizations.of(context).km)
                                              ),
 
 
@@ -349,7 +348,7 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                                      Theme.of(context).primaryColor,
                                      onPressed: () {
 
-                                      _launchMapsUrl(clinicObj!.getLatitude(), clinicObj!.getLongitude());
+                                      _launchMapsUrl(item!.getLatitude(), item!.getLongitude());
 
                                      },
 

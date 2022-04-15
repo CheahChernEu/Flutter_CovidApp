@@ -6,7 +6,7 @@ import 'adminDashboard.dart';
 import 'adminHomepage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/foundation.dart' show SynchronousFuture;
-// import 'SecondRoutePage.dart';
+import 'GoogleMap.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,7 +51,13 @@ class DemoLocalizations {
       'caseDateInputHint': 'e.g. 2022-08-12',
       'caseDateInputValidation': 'Please enter valid date',
       'addButton': 'Added Successfully!',
-
+      'vaccinationCentres': 'Covid_19 Vaccination Centres',
+      'totalDistance':'Total Distance: ',
+      'km':' KM',
+      'availableVaccine': 'Vaccine Available: ',
+      'address':'Address: ',
+      'hotline':'Hotline: ',
+      'distance':'Distance: ',
     },
     'ms': {
       'title': 'Laman Utama Covid_App',
@@ -82,6 +88,13 @@ class DemoLocalizations {
       'caseDateInputHint': 'cth. 2022-08-12',
       'caseDateInputValidation': 'Sila masukkan tarikh yang sah',
       'addButton': 'Berjaya Ditambahkan!',
+      'vaccinationCentres' : 'Pusat Vaksinasi Covid-19',
+      'totalDistance':'Jumlah Jarak: ',
+      'km': ' KM',
+      'availableVaccine': 'Vaksin yang Tersedia: ',
+      'address':'Alamat: ',
+      'hotline':'Talian Hotline: ',
+      'distance':'Jarak: ',
     },
 
     'zh': {
@@ -113,6 +126,13 @@ class DemoLocalizations {
       'caseDateInputHint': '例如 2022-08-12',
       'caseDateInputValidation': '请填入正确的日期',
       'addButton': '添加成功！',
+      'vaccinationCentres': 'Covid-19 疫苗接种中心',
+      'totalDistance':'总距离: ',
+      'km':" 公里",
+      'availableVaccine': "可用疫苗: ",
+      'address':"地址: ",
+      'hotline':'热线: ',
+      'distance':'距离: ',
     },
   };
 
@@ -230,6 +250,40 @@ class DemoLocalizations {
     return _localizedValues[locale.languageCode]!['addButton']!;
   }
 
+  String get vaccinationCentres {
+    return _localizedValues[locale.languageCode]!['vaccinationCentres']!;
+  }
+
+  String get totalDistance {
+    return _localizedValues[locale.languageCode]!['totalDistance']!;
+  }
+
+  String get km {
+    return _localizedValues[locale.languageCode]!['km']!;
+  }
+  String get availableVaccine {
+    return _localizedValues[locale.languageCode]!['availableVaccine']!;
+  }
+
+  String get address {
+    return _localizedValues[locale.languageCode]!['address']!;
+  }
+
+  String get hotline {
+    return _localizedValues[locale.languageCode]!['hotline']!;
+  }
+
+  String get distance {
+    return _localizedValues[locale.languageCode]!['distance']!;
+  }
+
+
+
+
+
+
+
+
 }
 class DemoLocalizationsDelegate
     extends LocalizationsDelegate<DemoLocalizations> {
@@ -277,8 +331,7 @@ class MyApp extends StatelessWidget {
         '/adminDashboard': (context) => const Admin_Dashboard(),
         '/adminClinicDashboard': (context) => const Admin_Clinic_Dashboard(),
         '/adminHomepage': (context) => const AdminHomePage(),
-        // '/third': (context) => const ThirdPageForm(),
-        // '/fourth': (context) => const FourthPageForm()
+        '/publicUser': (context) => const MyGoogleMap(),
       },
     );
   }
