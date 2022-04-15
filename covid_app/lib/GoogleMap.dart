@@ -9,7 +9,6 @@ import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:math';
 
 
-
 class Clinics {
   final String clinicID;
   final String clinicName;

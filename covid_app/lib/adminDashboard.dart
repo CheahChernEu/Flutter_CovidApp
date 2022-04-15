@@ -284,30 +284,17 @@ class AddCases extends StatelessWidget {
         backgroundColor: Colors.blueAccent,
         child: const Icon(Icons.add),
         onPressed: () {
-          if(newCasesController.text != '' && deathCasesController.text != '' && dateController.text != ''){
-            createCases(newCasesController.text, deathCasesController.text, dateController.text);
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  // Retrieve the text the that user has entered by using the
-                  // TextEditingController.
-                  content: Text(DemoLocalizations.of(context).addSuccessfullyButton),
-                );
-              },
-            );
-          }else{
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  // Retrieve the text the that user has entered by using the
-                  // TextEditingController.
-                  content: Text(DemoLocalizations.of(context).addFailedButton),
-                );
-              },
-            );
-          }
+          createCases(newCasesController.text, deathCasesController.text, dateController.text);
+          showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                // Retrieve the text the that user has entered by using the
+                // TextEditingController.
+                content: Text(DemoLocalizations.of(context).addButton),
+              );
+            },
+          );
         },
         tooltip: 'Show me the value!',
       ),
@@ -344,15 +331,13 @@ class CasesListing extends StatelessWidget {
                           showDialog<String>(
                             context: context,
                             builder: (BuildContext context) => AlertDialog(
-                              title: Text(DemoLocalizations.of(context).dailyCasesDetails),
+                              title: const Text('Daily Cases:'),
                               content: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.stretch,
-                                  children: <Widget>[
-                                    Text(DemoLocalizations.of(context).caseID + data![index].id),
-                                    Text(DemoLocalizations.of(context).deathCase + data![index].deathCases),
-                                    Text(DemoLocalizations.of(context).newCase + data![index].newCases),
-                                    Text(DemoLocalizations.of(context).date + data![index].casesDate),
+                                  children: <Widget>[ Text("Case Id: " + data![index].id),Text("Daily Death Cases: " + data![index].deathCases),
+                                    Text("Daily New Cases: " + data![index].newCases),
+                                    Text("Date: " + data![index].casesDate),
 
 
 
@@ -365,7 +350,7 @@ class CasesListing extends StatelessWidget {
                                       context: context,
                                       builder: (context) {
                                         final snackBar = SnackBar(
-                                        content: Text(DemoLocalizations.of(context).deleteBtn),
+                                        content: const Text('Delete Successfully!'),
                                       );
 
                                         return AlertDialog(
@@ -376,10 +361,9 @@ class CasesListing extends StatelessWidget {
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               crossAxisAlignment: CrossAxisAlignment.stretch,
                                               children: <Widget>[
-                                                Text(DemoLocalizations.of(context).caseID + data![index].id),
-                                                Text(DemoLocalizations.of(context).deathCase + data![index].deathCases),
-                                                Text(DemoLocalizations.of(context).newCase + data![index].newCases),
-                                                Text(DemoLocalizations.of(context).date + data![index].casesDate),
+                                                Text("Case Id: " + data![index].id),Text("Daily Death Cases: " + data![index].deathCases),
+                                                Text("Daily New Cases: " + data![index].newCases),
+                                                Text("Date: " + data![index].casesDate),
                                                 new ElevatedButton(
                                                 onPressed: () {
                                                   data?.removeAt(index);
@@ -474,19 +458,19 @@ class CaseCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                               Text(
-                                  DemoLocalizations.of(context).caseID + this.caseID, style: TextStyle(
+                                  "Case ID: " + this.caseID, style: TextStyle(
                                   fontWeight: FontWeight.bold
                               )
                               ),
                              Text(
-                                 DemoLocalizations.of(context).deathCase + this.deathCases
+                                  "Daily Death Cases: " + this.deathCases
                               ),
 
                            Text(
-                               DemoLocalizations.of(context).newCase + this.newCases
+                                  "Daily New Cases: " + this.newCases
                               ),
                             Text(
-                                DemoLocalizations.of(context).date + this.casesDate
+                                  "Date: " + this.casesDate
                               ),
                             ],
                           ),
@@ -524,10 +508,10 @@ class UpdatePage extends StatelessWidget {
                 Card(child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      Text(DemoLocalizations.of(context).caseID + this.caseID),
-                      Text(DemoLocalizations.of(context).deathCase + this.deathCases),
-                      Text(DemoLocalizations.of(context).newCase + this.newCases),
-                      Text(DemoLocalizations.of(context).date + this.casesDate)
+              Text("Case Id: " + this.caseID),
+                  Text("Daily Death Cases: " + this.deathCases),
+                            Text("Daily New Cases: " + this.newCases),
+                            Text("Date: " + this.casesDate)
                     ],),),
 
                             Padding(
@@ -545,13 +529,13 @@ class UpdatePage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                               child:  TextFormField(
                                 controller: newCasesController,
-                                decoration: InputDecoration(
-                                  hintText: DemoLocalizations.of(context).newCaseInputHint,
-                                  labelText: DemoLocalizations.of(context).newCaseInputLabel,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter daily new cases',
+                                  labelText: 'Enter Daily New Cases',
                                 ),
                                 validator: (value) {
                                   if (value == '') {
-                                    return DemoLocalizations.of(context).newCaseInputValidation;
+                                    return 'Please enter valid new cases amount';
                                   }
                                   return null;
                                 },
@@ -562,13 +546,13 @@ class UpdatePage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                               child:  TextFormField(
                                 controller: deathCasesController,
-                                decoration: InputDecoration(
-                                  hintText: DemoLocalizations.of(context).deathCaseInputHint,
-                                  labelText: DemoLocalizations.of(context).deathCaseInputLabel,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter Daily Death Cases',
+                                  labelText: 'Enter Daily Death Cases',
                                 ),
                                 validator: (value) {
                                   if (value == '') {
-                                    return DemoLocalizations.of(context).deathCaseInputValidation;
+                                    return 'Please enter valid death cases amount';
                                   }
                                   return null;
                                 },
@@ -579,13 +563,13 @@ class UpdatePage extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
                               child:  TextFormField(
                                 controller: dateController,
-                                decoration: InputDecoration(
-                                  hintText: DemoLocalizations.of(context).caseDateInputHint,
-                                  labelText: DemoLocalizations.of(context).caseDateInputLabel,
+                                decoration: const InputDecoration(
+                                  hintText: 'Enter date in 2022-08-08 format',
+                                  labelText: 'Enter Daily Cases Date',
                                 ),
                                 validator: (value) {
                                   if (value == '') {
-                                    return DemoLocalizations.of(context).caseDateInputValidation;
+                                    return 'Please enter valid date';
                                   }
                                   return null;
                                 },
