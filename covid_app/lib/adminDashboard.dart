@@ -54,7 +54,7 @@ createCases(String deathCases, String newCases, String casesDate) async {
 
 
   final response = await http.post(
-      Uri.parse('http://192.168.64.2/phpInsert.php'),
+      Uri.parse('http://192.168.1.104/phpInsert.php'),
       body: {
         'deathCases': deathCases,
         'newCases': newCases,
@@ -66,7 +66,7 @@ createCases(String deathCases, String newCases, String casesDate) async {
 
 Future <List<Cases>> fetchData() async {
   final response =await http
-      .get(Uri.parse('http://192.168.64.2/convertjson.php'));
+      .get(Uri.parse('http://192.168.1.104/convertjson.php'));
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => new Cases.fromJson(data)).toList();
@@ -79,7 +79,7 @@ Future <List<Cases>> fetchData() async {
 
   deleteCase(String id) async {
     final http.Response response = await http.post(
-      Uri.parse('http://192.168.64.2/phpDelete.php'),
+      Uri.parse('http://192.168.1.104/phpDelete.php'),
       body:{
         'id' : id
       }
@@ -101,7 +101,7 @@ Future <List<Cases>> fetchData() async {
 
 updateCase(String id, String newCases, String deathCases, String caseDate) async {
   final http.Response response = await http.post(
-      Uri.parse('http://192.168.64.2/phpUpdate.php'),
+      Uri.parse('http://192.168.1.104/phpUpdate.php'),
       body:{
         'id' : id,
         'newCases' : newCases,
@@ -353,8 +353,6 @@ class CasesListing extends StatelessWidget {
                                     Text(DemoLocalizations.of(context).deathCase + data![index].deathCases),
                                     Text(DemoLocalizations.of(context).newCase + data![index].newCases),
                                     Text(DemoLocalizations.of(context).date + data![index].casesDate),
-
-
 
                                  ]
                               ),

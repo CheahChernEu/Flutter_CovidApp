@@ -68,7 +68,7 @@ class Clinics {
 
 Future <List<Clinics>> fetchData() async {
   final response =await http
-      .get(Uri.parse('http://192.168.64.2/clinicConvertjson.php'));
+      .get(Uri.parse('http://192.168.1.104/clinicConvertjson.php'));
   if (response.statusCode == 200) {
     List jsonResponse = json.decode(response.body);
     return jsonResponse.map((data) => new Clinics.fromJson(data)).toList();
@@ -92,7 +92,7 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
   final Map<String, Marker> _markers = {};
   PolylinePoints polylinePoints = PolylinePoints();
   Map<PolylineId, Polyline> polylines = {}; //polylines to show direction
-  LatLng startLocation = const LatLng(	3.0747733547685527, 101.74452834886301);
+  LatLng startLocation = const LatLng(	3.1790435240090806, 101.54942644539562);
   late LatLng endLocation;
   double distance = 0.0;
   Set<Marker> markers = Set();
@@ -273,17 +273,16 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       List<Clinics>? data = snapshot.data;
+                      List<Clinics> clinics = [];
                       return SingleChildScrollView(
                         physics: ScrollPhysics(),
                         child: ListView.builder(
                             physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
-                            itemCount: data?.length,
+                            itemCount: data!.length,
                             itemBuilder: (BuildContext context, int index) {
 
-                              final item = data?[index];
-                              List<Clinics> clinics = [];
-                              for (int pointer = 0; pointer < data!.length-1; pointer++){
+                              for (int pointer = 0; pointer < data!.length - 1; pointer++){
                                 var item1 = data[pointer];
                                 var item2 = data[pointer+1];
                                 double ele1 =  calculateDistance(startLocation.latitude, startLocation.longitude, item1!.getLatitude(), item1!.getLongitude());
@@ -292,13 +291,11 @@ class _MyGoogleMapState extends State<MyGoogleMap> {
                                   var temp = data[pointer];
                                   data[pointer] = data[pointer+1];
                                   data[pointer+1] = temp;
-                                  pointer = -1;
                                 }
                                 clinics.add(data[pointer]);
                               }
 
                               final clinicObj = clinics?[index];
-
                               return Center(
                                 child: Card(
                                   child: ListTile(
